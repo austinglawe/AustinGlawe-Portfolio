@@ -26,7 +26,7 @@ Dim j As Long
     Set wbMacro = ThisWorkbook
 
 ' First ask the user for a password - Store the correct password in a variable called 'CorrectPassword'
-    CorrectPassword = "Test123"
+    CorrectPassword = [SensitiveDataItemRemoved]
 
     ' Prompt user for password
         Password = InputBox("Enter the password to use this macro:", "Authorization Required")
