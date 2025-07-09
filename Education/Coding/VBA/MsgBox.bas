@@ -1,6 +1,6 @@
 ' Message Boxes
 
-    ' MsgBox(prompt, buttons, title, [helpfile], [context]) -> Parentheses can be used or you can just add a space after 'MsgBox'
+    ' MsgBox(prompt, buttons, title, [helpfile], [context])
     
         ' Prompt – Message displayed to the user.
 
@@ -41,6 +41,8 @@
 
         ' Title – Text that appears in the title bar of the message box window (optional but recommended)
 
+        ' You can alternatively name which part you want to use by saying "Title:=", "Buttons:=", or "Prompt:=" -> for clarity or to change the order of naming.
+
 ' Examples:
 Sub MsgBox_Examples()
 
@@ -63,6 +65,6 @@ Sub MsgBox_Examples()
         MsgBox "vbYesNo + vbCritical + vbMsgBoxHelpButton", vbYesNo + vbCritical + vbMsgBoxHelpButton, "YesNo + Critical + Help"
 
     ' 7. vbRetryCancel + vbSystemModal
-        MsgBox "vbRetryCancel + vbSystemModal", vbRetryCancel + vbSystemModal, "RetryCancel + SystemModal"
+        MsgBox Title:="RetryCancel + SystemModal", Buttons:=vbRetryCancel + vbSystemModal, Prompt:="vbRetryCancel + vbSystemModal"
 
 End Sub
