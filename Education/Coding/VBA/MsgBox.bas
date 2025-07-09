@@ -42,9 +42,9 @@
 
         ' Title – Text that appears in the title bar of the MsgBox window (optional but recommended for clarity).
 
-        ' Helpfile – Optional path to a help file to be used if the user clicks the Help button.
-
-        ' Context – Numeric expression identifying the context ID within the Help file.
+        ' Helpfile – Optional path to a legacy Windows Help (.hlp) file (rarely used today; requires WinHlp32.exe support).
+        
+        ' Context – Numeric context ID for a topic within the help file (only relevant if Helpfile is provided).
 
     ' Notes:
         ' - Named arguments (Prompt:=, Buttons:=, Title:=, Helpfile:=, Context:=) can be used for clarity or if providing arguments out of order.
