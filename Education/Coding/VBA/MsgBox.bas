@@ -1,10 +1,11 @@
 ' Message Boxes
+    ' Syntax:
+    '   MsgBox(prompt, buttons, title, [helpfile], [context])
 
-    ' MsgBox(prompt, buttons, title, [helpfile], [context])
-    
-        ' Prompt – Message displayed to the user.
+        ' Prompt – Message displayed to the user (string).
 
-        ' Buttons – Combine multiple options using "+" or "Or"; specify what buttons MsgBox shows (only 1 button set allowed at a time)
+        ' Buttons – Specify the type of message box by combining multiple options using "+" or "Or".
+        '           Only one button set is allowed, but you can combine it with icons, default buttons, modality, and other UI options.
 
             ' Button Sets (choose only one):
                 ' vbOKOnly (default if not specified) – Shows "OK" button
@@ -13,8 +14,8 @@
                 ' vbYesNoCancel – Shows "Yes", "No", and "Cancel" buttons
                 ' vbYesNo – Shows "Yes" and "No" buttons
                 ' vbRetryCancel – Shows "Retry" and "Cancel" buttons
-                
-                ' Possible button responses (and their numeric values):
+
+                ' Possible return values (numeric):
                     ' vbOK (1), vbCancel (2), vbAbort (3), vbRetry (4), vbIgnore (5), vbYes (6), vbNo (7)
 
             ' Icons (optional, choose only one):
@@ -23,25 +24,33 @@
                 ' vbInformation – Info icon (blue circle with "i")
                 ' vbQuestion – Question icon (blue "?")
 
-            ' Default button (optional, choose only one) – Specifies which button has initial focus:
-                ' vbDefaultButton1 – 1st button
+            ' Default Button (optional, choose only one):
+                ' vbDefaultButton1 – 1st button (default)
                 ' vbDefaultButton2 – 2nd button
                 ' vbDefaultButton3 – 3rd button
                 ' vbDefaultButton4 – 4th button
 
             ' Modality (optional, choose only one):
-                ' vbApplicationModal (default) – Blocks input to the application until user responds
-                ' vbSystemModal – Blocks input to all windows until user responds
+                ' vbApplicationModal (default) – Blocks input to the calling application until user responds
+                ' vbSystemModal – Blocks input to all applications until user responds (MsgBox stays on top system-wide)
 
-            ' Alignment & UI options (optional):
+            ' Alignment & UI Options (optional):
                 ' vbMsgBoxRight – Text aligned right
-                ' vbMsgBoxRtlReading – Right-to-left reading order (e.g., Arabic/Hebrew)
-                ' vbMsgBoxSetForeground – MsgBox stays on top of all windows
-                ' vbMsgBoxHelpButton – Adds Help button (requires helpfile argument)
+                ' vbMsgBoxRtlReading – Right-to-left reading order (for RTL languages)
+                ' vbMsgBoxSetForeground – MsgBox brought to the foreground
+                ' vbMsgBoxHelpButton – Adds a Help button (requires helpfile argument)
 
-        ' Title – Text that appears in the title bar of the message box window (optional but recommended)
+        ' Title – Text that appears in the title bar of the MsgBox window (optional but recommended for clarity).
 
-        ' You can alternatively name which part you want to use by saying "Title:=", "Buttons:=", or "Prompt:=" -> for clarity or to change the order of naming.
+        ' Helpfile – Optional path to a help file to be used if the user clicks the Help button.
+
+        ' Context – Numeric expression identifying the context ID within the Help file.
+
+    ' Notes:
+        ' - Named arguments (Prompt:=, Buttons:=, Title:=, Helpfile:=, Context:=) can be used for clarity or if providing arguments out of order.
+        ' - Example:
+        '     MsgBox Prompt:="Are you sure?", Buttons:=vbYesNo + vbQuestion, Title:="Confirmation"
+
 
 ' Examples:
 Sub MsgBox_Examples()
@@ -61,10 +70,10 @@ Sub MsgBox_Examples()
     ' 5. vbYesNoCancel + vbQuestion + vbDefaultButton3 + vbMsgBoxSetForeground
         MsgBox "vbYesNoCancel + vbQuestion + vbDefaultButton3 + vbMsgBoxSetForeground", vbYesNoCancel + vbQuestion + vbDefaultButton3 + vbMsgBoxSetForeground, "YesNoCancel + Question"
 
-    ' 6. vbYesNo + vbCritical + vbMsgBoxHelpButton
-        MsgBox "vbYesNo + vbCritical + vbMsgBoxHelpButton", vbYesNo + vbCritical + vbMsgBoxHelpButton, "YesNo + Critical + Help"
+    ' 6. vbYesNo Or vbCritical Or vbMsgBoxHelpButton - "Or" instead of "+"
+        MsgBox "vbYesNo Or vbCritical Or vbMsgBoxHelpButton", vbYesNo Or vbCritical Or vbMsgBoxHelpButton, "YesNo + Critical + Help"
 
-    ' 7. vbRetryCancel + vbSystemModal
+    ' 7. vbRetryCancel + vbSystemModal - naming arguments
         MsgBox Title:="RetryCancel + SystemModal", Buttons:=vbRetryCancel + vbSystemModal, Prompt:="vbRetryCancel + vbSystemModal"
 
 End Sub
