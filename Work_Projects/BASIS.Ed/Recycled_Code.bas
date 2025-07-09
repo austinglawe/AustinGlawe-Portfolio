@@ -3,4 +3,3 @@
 Dim UserResponse As VbMsgBoxResult
 ' Ask user if they are sure they want to start the [] Converter 
   UserResponse = MsgBox("Are you sure you want to start the [] Converter?", vbYesNo + vbQuestion, "Confirmation to start the [] Converter")
-
