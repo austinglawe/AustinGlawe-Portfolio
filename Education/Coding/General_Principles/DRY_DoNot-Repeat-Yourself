@@ -1,0 +1,23 @@
+What it means:
+Avoid duplicating the same code logic in multiple places.
+
+If you find yourself copying and pasting code, it’s time to refactor.
+
+DRY promotes maintainability: if you need to change logic, you update in one place only.
+
+How to achieve it:
+Use functions or procedures to encapsulate repeated logic.
+
+Create modules or classes for reusable code blocks.
+
+Use loops or data structures to handle repetitive tasks.
+
+Best practices:
+
+Refactor duplicated code into reusable units early.
+
+Keep functions focused on a single responsibility.
+
+Use parameters to customize behavior instead of copying code.
+
+Avoid over-engineering — balance DRY with simplicity.
