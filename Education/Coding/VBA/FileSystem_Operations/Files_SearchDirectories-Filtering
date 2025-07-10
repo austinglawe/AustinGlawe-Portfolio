@@ -1,0 +1,44 @@
+' -----------------------------------------
+' VBA FileSystem_Operations:
+' Searching directories and filtering files
+' -----------------------------------------
+'
+' Enumerate files in folder:
+'   Dim fso As Object, folder As Object, file As Object
+'   Set fso = CreateObject("Scripting.FileSystemObject")
+'   Set folder = fso.GetFolder("C:\Test")
+'   For Each file In folder.Files
+'       Debug.Print file.Name
+'   Next
+'
+' Filter files by extension:
+'   For Each file In folder.Files
+'       If LCase(fso.GetExtensionName(file.Name)) = "txt" Then
+'           Debug.Print file.Name
+'       End If
+'   Next
+'
+' Filter files by name content:
+'   If InStr(file.Name, "Report") > 0 Then
+'       ' Do something
+'   End If
+'
+' Recursive search subfolders:
+'   Sub ListFilesInFolder(folderPath As String)
+'       Dim fso As Object, folder As Object, subFolder As Object, file As Object
+'       Set fso = CreateObject("Scripting.FileSystemObject")
+'       Set folder = fso.GetFolder(folderPath)
+'       For Each file In folder.Files
+'           Debug.Print file.Path
+'       Next
+'       For Each subFolder In folder.SubFolders
+'           ListFilesInFolder subFolder.Path
+'       Next
+'   End Sub
+'
+' Best practices:
+' - Use LCase for case-insensitive extension checks.
+' - Be careful with recursion depth.
+' - Check folder exists before processing.
+'
+' -----------------------------------------
