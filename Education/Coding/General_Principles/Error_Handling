@@ -1,0 +1,19 @@
+What it means:
+Prepare your code to deal gracefully with unexpected situations or inputs, preventing crashes or incorrect behavior.
+
+Why it matters:
+Improves program robustness and user experience.
+
+Makes debugging easier by providing clear error messages.
+
+Helps avoid data corruption or loss.
+
+
+Best practices:
+Catch specific exceptions/errors rather than a generic catch-all.
+
+Clean up resources (files, connections) in finally (Python) or after error handling in VBA.
+
+Provide meaningful messages to help diagnose problems.
+
+Log errors where appropriate.
