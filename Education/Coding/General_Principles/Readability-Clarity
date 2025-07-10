@@ -1,0 +1,15 @@
+What it means:
+Write code that is easy to read and understand, not just for yourself but for others (including future you).
+
+Clear code helps with debugging, maintenance, and collaboration.
+
+How to achieve it:
+Use meaningful variable and function names that describe their purpose.
+
+Keep functions and methods small and focused—each should do one thing.
+
+Write comments to explain why you’re doing something, not what the code does. The code itself should show what it does.
+
+Use consistent indentation and spacing. Most languages have style guides (e.g., PEP 8 for Python).
+
+Avoid complex or nested logic where simpler solutions exist.
