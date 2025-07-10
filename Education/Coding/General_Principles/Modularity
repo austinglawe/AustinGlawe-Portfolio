@@ -1,0 +1,30 @@
+What it means:
+Break your program into separate, independent parts — functions, classes, modules.
+
+Each module or function should handle a specific piece of functionality.
+
+Why it matters:
+Makes code easier to read, maintain, and test.
+
+Allows reusing parts of the program in other projects.
+
+Facilitates teamwork by enabling different people to work on different modules.
+
+How to achieve it:
+Write small, focused functions or methods.
+
+Organize related functions/classes into modules or files.
+
+Use classes to encapsulate data and behavior together.
+
+Avoid large monolithic code blocks.
+
+Best practices:
+
+Aim for functions/classes that do one thing.
+
+Organize code logically by functionality.
+
+Use meaningful module and function names.
+
+Keep interfaces (inputs/outputs) clear and minimal.
