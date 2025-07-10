@@ -13,3 +13,13 @@ Write comments to explain why you’re doing something, not what the code does. 
 Use consistent indentation and spacing. Most languages have style guides (e.g., PEP 8 for Python).
 
 Avoid complex or nested logic where simpler solutions exist.
+
+Best practices:
+
+Always name variables, functions, and classes to reflect their role.
+
+Break code into logical chunks with whitespace and line breaks.
+
+Use comments sparingly and meaningfully.
+
+Format code according to your language’s style guide.
