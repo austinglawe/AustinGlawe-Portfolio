@@ -1,0 +1,43 @@
+What it means:
+Using systems like Git to track changes to your code over time.
+
+Why it matters:
+Keeps a history of all changes, so you can revert or compare versions.
+
+Enables collaboration with others safely.
+
+Helps manage different features or bug fixes simultaneously using branches.
+
+Best practices:
+Commit often with clear messages.
+
+Use branches for new features or fixes.
+
+Review changes before merging.
+
+Keep sensitive info (passwords, keys) out of repos.
+
+# -----------------------------------------
+# General_Coding_Principles:
+# Version Control
+# -----------------------------------------
+#
+# Use Git or other version control systems to:
+# - Track code history
+# - Collaborate safely
+# - Manage branches for features/fixes
+#
+# Basic Git commands:
+#   git init
+#   git add .
+#   git commit -m "Message"
+#   git remote add origin <url>
+#   git push -u origin main
+#
+# Best practices:
+# - Commit frequently with clear messages
+# - Use branches for new work
+# - Review before merging
+# - Exclude sensitive info
+#
+# -----------------------------------------
