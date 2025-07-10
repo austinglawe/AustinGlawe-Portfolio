@@ -1,0 +1,38 @@
+# -----------------------------------------
+# General_Coding_Principles:
+# Core principles for writing quality code
+# -----------------------------------------
+#
+# 1. Readability & Clarity:
+#    - Use meaningful names.
+#    - Keep functions focused.
+#    - Comment why, not what.
+#
+# 2. DRY (Don't Repeat Yourself):
+#    - Avoid duplicated code.
+#    - Use functions/modules.
+#
+# 3. Modularity:
+#    - Break code into focused parts.
+#    - Easier to maintain/test/reuse.
+#
+# 4. Consistent Naming Conventions:
+#    - Follow language/team style guides.
+#
+# 5. Error Handling:
+#    - Use try-except or error handlers.
+#    - Provide informative feedback.
+#
+# 6. Testing & Validation:
+#    - Write unit and integration tests.
+#    - Catch bugs early.
+#
+# 7. Performance & Efficiency:
+#    - Prioritize correctness and clarity.
+#    - Optimize only after profiling.
+#
+# 8. Version Control:
+#    - Use Git or similar systems.
+#
+# -----------------------------------------
+
