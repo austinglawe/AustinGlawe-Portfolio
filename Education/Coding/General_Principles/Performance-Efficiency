@@ -1,0 +1,29 @@
+What it means:
+Writing code that runs quickly and uses resources (memory, CPU) wisely.
+
+Why it matters:
+Efficient code improves user experience and scales better.
+
+Important in large datasets, loops, and resource-constrained environments.
+
+How to approach it:
+Write clear and correct code first.
+
+Profile code to find slow parts before optimizing.
+
+Use efficient algorithms and data structures.
+
+Avoid unnecessary computations or repeated work.
+
+Use built-in functions and libraries optimized in lower-level languages.
+
+
+Best practices:
+
+Profile before optimizing.
+
+Optimize hotspots, not every line.
+
+Use efficient libraries and data structures.
+
+Keep readability balanced with performance.
