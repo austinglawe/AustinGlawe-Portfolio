@@ -5,22 +5,22 @@
 ' The FileDialog object allows VBA to show standard Windows dialogs so users can select files or folders.
 ' It has four main dialog types:
 '
-' 1️⃣ msoFileDialogFilePicker:
+' 1. msoFileDialogFilePicker:
 '     Use this when you want the user to pick one or more existing files.
 '     It’s a general-purpose dialog that doesn’t mimic Excel’s native Open screen.
 '     Best for scenarios like “Please choose a file to import.”
 '
-' 2️⃣ msoFileDialogOpen:
+' 2️. msoFileDialogOpen:
 '     Looks and behaves like Excel’s built-in File > Open dialog.
 '     Use this if you want a consistent Office-style user experience for opening files,
 '     possibly including access to recent files and shared locations (OneDrive, etc.).
 '
-' 3️⃣ msoFileDialogSaveAs:
+' 3. msoFileDialogSaveAs:
 '     Looks and behaves like Excel’s File > Save As dialog.
 '     Use this when you want the user to choose a path and name for saving a file.
 '     Important: this dialog does NOT actually save the file itself — you must handle that in your code.
 '
-' 4️⃣ msoFileDialogFolderPicker:
+' 4. msoFileDialogFolderPicker:
 '     Used when you want the user to pick a folder rather than a file.
 '     Perfect for workflows like selecting a folder to save multiple files or process an entire directory.
 '
