@@ -1,0 +1,28 @@
+What it means:
+Use a uniform style for naming variables, functions, classes, constants, etc.
+
+Naming conventions differ by language but should be consistent within a project or team.
+
+Why it matters:
+Makes code more readable and predictable.
+
+Reduces confusion and mistakes.
+
+Helps tools and linters identify issues.
+
+Common styles:
+Style	Usage    | Example	       | Description
+snake_case	     total_price	      Words lowercase, separated by underscores. Common in Python.
+camelCase	       totalPrice	        First word lowercase, subsequent words capitalized. Common in JavaScript, sometimes VBA.
+PascalCase	     TotalPrice	        Every word capitalized. Used for classes in many languages.
+UPPER_CASE	      MAX_LIMIT	        Constants or macros.
+
+Best practices:
+
+Follow language or team standards (e.g., PEP8 for Python).
+
+Be descriptive but concise.
+
+Avoid ambiguous abbreviations.
+
+Use consistent casing for similar entities.
