@@ -11,7 +11,7 @@ locations = {
 
 # ─── Date range ───────────────────────────────────────────────────────────────
 start_date = "2025-07-01"
-end_date = "2025-07-10"
+end_date   = "2025-07-10"
 
 # ─── List every supported hourly variable ─────────────────────────────────────
 hourly_vars = [
@@ -28,7 +28,7 @@ hourly_vars = [
     "us_aqi", "us_aqi_pm2_5", "us_aqi_pm10",
     "us_aqi_nitrogen_dioxide", "us_aqi_ozone", "us_aqi_sulphur_dioxide"
 ]
-# Note: if you also want CH2O, PAN, VOCs, wildfire-PM, etc., add them here.
+# Note: add any extra Open-Meteo fields here if desired.
 
 # ─── Fetch and flatten ────────────────────────────────────────────────────────
 rows = []
@@ -41,10 +41,8 @@ for city, (lat, lon) in locations.items():
         "hourly":     ",".join(hourly_vars),
         "timezone":   "UTC"
     }
-    r = requests.get(
-        "https://air-quality-api.open-meteo.com/v1/air-quality",
-        params=params
-    )
+    r  = requests.get("https://air-quality-api.open-meteo.com/v1/air-quality",
+                      params=params)
     r.raise_for_status()
     js = r.json()
 
@@ -58,7 +56,7 @@ for city, (lat, lon) in locations.items():
         for t, v in zip(times, values):
             rows.append({
                 "city":      city,
-                "datetime":  t,        # e.g. "2025-07-01T00:00"
+                "datetime":  t,        # ISO 8601 UTC hour
                 "variable":  var,
                 "value":     v,
                 "unit":      unit,
@@ -66,8 +64,21 @@ for city, (lat, lon) in locations.items():
                 "longitude": lon
             })
 
-# ─── Save to CSV ─────────────────────────────────────────────────────────────
+# ─── Build DataFrame ─────────────────────────────────────────────────────────
 df = pd.DataFrame(rows)
-df.to_csv("aq_open_meteo_all_vars_july1-10_2025.csv", index=False)
-print(
-    f"Written {len(df)} rows for {len(locations)} cities and {len(hourly_vars)} variables.")
+total_rows = len(df)
+print(f"Total rows fetched: {total_rows}")
+
+# ─── Split into 1,000,000-row CSVs ───────────────────────────────────────────
+MAX_ROWS = 1_000_000
+num_files = (total_rows + MAX_ROWS - 1) // MAX_ROWS
+
+for i in range(num_files):
+    start_i = i * MAX_ROWS
+    end_i   = start_i + MAX_ROWS
+    chunk   = df.iloc[start_i:end_i]
+    filename = f"aq_open_meteo_all_vars_{start_date}_to_{end_date}_{i+1}.csv"
+    chunk.to_csv(filename, index=False)
+    print(f"Wrote rows {start_i}–{min(end_i, total_rows)-1} to {filename}")
+
+print(f"Done: {num_files} file(s) created.")
