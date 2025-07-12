@@ -74,7 +74,15 @@ Rails https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergro
 
 Military Installations https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Military+Installations
 
-Water https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Water
+**Water** https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Water
+**Area Hydrography**
+  **Select a State
+    **Select a County
+     **Download**
+**Linear Hydrography**
+  **Select a State
+    **Select a County
+     **Download**
 
 ****Relationship Files****
 Future Relationship Files https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Relationship+Files
