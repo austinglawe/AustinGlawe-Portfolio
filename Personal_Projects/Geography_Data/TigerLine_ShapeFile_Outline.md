@@ -1,17 +1,17 @@
-#Census TIGER/Line Shapefiles (2007–2024)#
+# Census TIGER/Line Shapefiles (2007–2024)
 Base URL: https://www.census.gov/cgi-bin/geo/shapefiles/index.php
 
-##Geographic Areas
-###American Indian Area Geography https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=American+Indian+Area+Geography
+## Geographic Areas
+### American Indian Area Geography https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=American+Indian+Area+Geography
 
-###American Indian/Alaska Native/Native Hawaiian Area (current)
+### American Indian/Alaska Native/Native Hawaiian Area (current)
 American Indian Tribal Subdivision (current)
 Alaska Native Regional Corporation (current) — Select a State (Alaska only)
 Tribal Block Group (current)
 Tribal Census Tract (current)
 Blocks https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Blocks+%282020%29
 
-###Tabulation Blocks (2020) — Select a State
+### Tabulation Blocks (2020) — Select a State
 Block Groups https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Block+Groups
 
 Select a State
@@ -74,12 +74,13 @@ Rails https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergro
 
 Military Installations https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Military+Installations
 
-**Water** https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Water
-**Area Hydrography**
+### Water
+https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Water
+#### **Area Hydrography**
   **Select a State
     **Select a County
      **Download**
-**Linear Hydrography**
+#### **Linear Hydrography**
   **Select a State
     **Select a County
      **Download**
