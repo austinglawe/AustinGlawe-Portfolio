@@ -40,52 +40,56 @@ https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Blo
   - (2000, Current)
 
 
-
-
-
-#### Tabulation Blocks (2020) 
-- Select a State
-
-
-
-
 #### Block Groups 
 https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Block+Groups
-
+- Select a State
+  - Download
 
 
 
 #### Census Tracts 
 https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Census+Tracts
 - Select a State
-
+  - Download
 
 
 
 #### Congressional Districts 
 https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Congressional+Districts+%28116%29
-- National File
-
+- Download National File
+- Check
 
 
 
 #### Consolidated Cities 
 https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Consolidated+Cities
-- National File
+- Select a State
+  - Connecticut, Georgia, Indiana, Kansas, Kentucky, Montana, Tennessee
+  - Download
 
 
 
 
 #### Core Based Statistical Areas (CBSAs) 
 https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Core+Based+Statistical+Areas+%28CBSAs+2020%29
-- National File
-
+- Metropolitian/Micropolitian Statistical Area (Current)
+  - Download National File
+- Combined New England City and Town Area (Current)
+  - Download National File
+- Combined Statistical Area (Current)
+  - Download National File
+- Metropolitian Division (Current)
+  - Download National File
+- New England City and Town Area (Current)
+  - Download National File
+- New England City and Town Area Division (Current)
+  - Download National File
 
 
 
 #### Counties (and equivalents) 
 https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Counties
-- Select a State
+- Download National File
 
 
 
@@ -93,27 +97,32 @@ https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Cou
 #### County Subdivisions 
 https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=County+Subdivisions+%28MCDs+and+CCDs%29
 - Select a State
+  - Download 
 
 
 
 
-#### Estates 
+#### Estate
 https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Estates
-- National File
+- Select a State
+  - Virgin Islands of the United States
+  - Download
 
 
 
 
 #### Places 
 https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Places
-- National File
+- Select a State
+  - Download
 
 
 
 
-#### Public Use Microdata Areas (PUMAs) 
+#### Public Use Microdata Areas (PUMAs) - (2010?)
 https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Public+Use+Microdata+Areas+%28PUMAs%29
-- National File
+- Select a State
+  - Download 
 
 
 
