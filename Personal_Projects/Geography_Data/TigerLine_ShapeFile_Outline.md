@@ -79,24 +79,32 @@ Water https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergro
 Relationship Files
 Future Relationship Files https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Relationship+Files
 **Address Ranges Relationship File**
-  **Select a State**
-    **Select a County**
+  **Select a State
+    **Select a County
+     **Download**
 **Address Range-Feature Shapefile**
-  **Select a State**
-    **Select a County**
+  **Select a State
+    **Select a County
+     **Download**
 **Address Range-Feature Name Relationship File**
-  **Select a State**
-    **Select a County**
+  **Select a State
+    **Select a County
+     **Download**
 **Topological Faces (Polygons with all Geocodes) Shapefile**
-  **Select a State**
-    **Select a County**
+  **Select a State
+    **Select a County
+     **Download**
 **Topological Faces-Area Hydrography Relationship File**
-  **Select a State**
-    **Select a County**
+  **Select a State
+    **Select a County
+     **Download**
 **Topological Faces-Area Landmark Relationship File**
-  **Select a State**
+  **Select a State
+   **Download**
 **Topological Faces-Military Installations Relationship File**
-  **National File**
+  **National File
+   **Download**
 **Feature Names Relationship File**
-  **Select a State**
-    **Select a County**
+  **Select a State
+    **Select a County
+     **Download**
