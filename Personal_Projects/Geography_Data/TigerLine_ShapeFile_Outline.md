@@ -1,18 +1,18 @@
 # Census TIGER/Line Shapefiles (2007–2024)
 Base URL: https://www.census.gov/cgi-bin/geo/shapefiles/index.php
 
-## Geographic Areas
-### American Indian Area Geography https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=American+Indian+Area+Geography
+## <u> Geographic Areas </u>
+#### American Indian Area Geography https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=American+Indian+Area+Geography
 
-### American Indian/Alaska Native/Native Hawaiian Area (current)
+#### American Indian/Alaska Native/Native Hawaiian Area (current)
 American Indian Tribal Subdivision (current)
 Alaska Native Regional Corporation (current) — Select a State (Alaska only)
 Tribal Block Group (current)
 Tribal Census Tract (current)
 Blocks https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Blocks+%282020%29
 
-### Tabulation Blocks (2020) — Select a State
-Block Groups https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Block+Groups
+#### Tabulation Blocks (2020) — Select a State
+#### Block Groups https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Block+Groups
 
 Select a State
 Census Tracts https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Census+Tracts
@@ -52,41 +52,52 @@ State Legislative Districts
 
 Upper Chamber: https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=State+Legislative+Districts+%28Upper+Chamber%29
 Lower Chamber: https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=State+Legislative+Districts+%28Lower+Chamber%29
-Subbarrio (Subminor Civil Divisions) https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Subminor+Civil+Divisions+%28Subbarrios%29
+#### Subbarrio (Subminor Civil Divisions) 
+https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Subminor+Civil+Divisions+%28Subbarrios%29
 
 Select a State
-Urban Areas https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Urban+Areas
+#### Urban Areas 
+https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Urban+Areas
 
 National File
-ZIP Code Tabulation Areas (ZCTAs) https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Zip+Code+Tabulation+Areas+%28ZCTAs%29
+#### ZIP Code Tabulation Areas (ZCTAs) 
+https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Zip+Code+Tabulation+Areas+%28ZCTAs%29
 
 National File
-Feature Layers
-All Lines https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=All+Lines
 
-Coastline https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Coastline
+## <u> Feature Layers </u>
+#### All Lines 
+https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=All+Lines
 
-Landmarks https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Landmarks
+#### Coastline 
+https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Coastline
 
-Roads https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Roads
+#### Landmarks 
+https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Landmarks
 
-Rails https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Rails
+#### Roads 
+https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Roads
 
-Military Installations https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Military+Installations
+#### Rails 
+https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Rails
 
-### Water
+#### Military Installations 
+https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Military+Installations
+
+#### Water
 https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Water
-#### **Area Hydrography**
+###### **Area Hydrography**
   **Select a State
     **Select a County
      **Download**
-#### **Linear Hydrography**
+###### **Linear Hydrography**
   **Select a State
     **Select a County
      **Download**
 
-****Relationship Files****
-Future Relationship Files https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Relationship+Files
+## <u> Relationship Files </u>
+#### Future Relationship 
+Files https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Relationship+Files
 **Address Ranges Relationship File**
   **Select a State
     **Select a County
