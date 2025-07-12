@@ -2,20 +2,26 @@
 Base URL: https://www.census.gov/cgi-bin/geo/shapefiles/index.php
 
 ## <u> Geographic Areas </u>
-#### American Indian Area Geography https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=American+Indian+Area+Geography
+#### American Indian Area Geography 
+https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=American+Indian+Area+Geography
 
 #### American Indian/Alaska Native/Native Hawaiian Area (current)
 - American Indian Tribal Subdivision (current)
-Alaska Native Regional Corporation (current) — Select a State (Alaska only)
-Tribal Block Group (current)
-Tribal Census Tract (current)
-Blocks https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Blocks+%282020%29
+- Alaska Native Regional Corporation (current) — Select a State (Alaska only)
+- Tribal Block Group (current)
+- Tribal Census Tract (current)
+  
+#### Blocks 
+https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=[YYYY]&layergroup=Blocks+%282020%29
+-
 
 #### Tabulation Blocks (2020) — Select a State
+-
+
 #### Block Groups https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Block+Groups
 
-Select a State
-Census Tracts https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Census+Tracts
+Census Tracts 
+https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Census+Tracts
 
 Select a State
 Congressional Districts https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Congressional+Districts+%28116%29
