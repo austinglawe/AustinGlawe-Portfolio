@@ -12,52 +12,65 @@ https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Ame
 - Tribal Census Tract (current)
   
 #### Blocks 
-https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=[YYYY]&layergroup=Blocks+%282020%29
+https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Blocks+%282020%29
 -
 
-#### Tabulation Blocks (2020) — Select a State
--
+#### Tabulation Blocks (2020) 
+- Select a State
 
-#### Block Groups https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Block+Groups
+#### Block Groups 
+https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Block+Groups
 
-Census Tracts 
+#### Census Tracts 
 https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Census+Tracts
+- Select a State
 
-Select a State
-Congressional Districts https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Congressional+Districts+%28116%29
+#### Congressional Districts 
+https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Congressional+Districts+%28116%29
+- National File
 
-National File
-Consolidated Cities https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Consolidated+Cities
+#### Consolidated Cities 
+https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Consolidated+Cities
+- National File
 
-National File
-Core Based Statistical Areas (CBSAs) https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Core+Based+Statistical+Areas+%28CBSAs+2020%29
+#### Core Based Statistical Areas (CBSAs) 
+https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Core+Based+Statistical+Areas+%28CBSAs+2020%29
+- National File
 
-National File
-Counties (and equivalents) https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Counties
+#### Counties (and equivalents) 
+https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Counties
+- Select a State
 
-Select a State
-County Subdivisions https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=County+Subdivisions+%28MCDs+and+CCDs%29
+#### County Subdivisions 
+https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=County+Subdivisions+%28MCDs+and+CCDs%29
+- Select a State
 
-Select a State
-Estates https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Estates
+#### Estates 
+https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Estates
+- National File
 
-National File
-Places https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Places
+#### Places 
+https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Places
+- National File
 
-National File
-Public Use Microdata Areas (PUMAs) https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Public+Use+Microdata+Areas+%28PUMAs%29
+#### Public Use Microdata Areas (PUMAs) 
+https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Public+Use+Microdata+Areas+%28PUMAs%29
+- National File
 
-National File
-School Districts https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=School+Districts+%28Elementary%2C+Secondary+%26+Unified%29
+#### School Districts 
+https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=School+Districts+%28Elementary%2C+Secondary+%26+Unified%29
+- National File
 
-National File
-States (and equivalents) https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=States+and+Equivalent
+#### States (and equivalents) 
+https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=States+and+Equivalent
+- National File
 
-National File
-State Legislative Districts
+#### State Legislative Districts
+- Upper Chamber:
+  - https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=State+Legislative+Districts+%28Upper+Chamber%29
+- Lower Chamber:
+  - https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=State+Legislative+Districts+%28Lower+Chamber%29
 
-Upper Chamber: https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=State+Legislative+Districts+%28Upper+Chamber%29
-Lower Chamber: https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=State+Legislative+Districts+%28Lower+Chamber%29
 #### Subbarrio (Subminor Civil Divisions) 
 https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Subminor+Civil+Divisions+%28Subbarrios%29
 
