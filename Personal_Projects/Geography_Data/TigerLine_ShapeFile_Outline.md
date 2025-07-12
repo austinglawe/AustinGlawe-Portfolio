@@ -22,8 +22,23 @@ https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Ame
 
 
 #### Blocks 
-https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Blocks+%282020%29
--
+https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Blocks
+- Select a State
+  - Download State File
+  - Select a County
+    - Download
+
+- Years
+  - 2021-2024 (2020)
+- Year 2020
+  - (2010, 2020)
+- Years 2011-2019
+  - (2010)
+- Year 2010
+  - (2000, 2010)
+- Years 2007-2009
+  - (2000, Current)
+
 
 
 
