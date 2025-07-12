@@ -5,7 +5,7 @@ Base URL: https://www.census.gov/cgi-bin/geo/shapefiles/index.php
 #### American Indian Area Geography https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=American+Indian+Area+Geography
 
 #### American Indian/Alaska Native/Native Hawaiian Area (current)
-American Indian Tribal Subdivision (current)
+- American Indian Tribal Subdivision (current)
 Alaska Native Regional Corporation (current) — Select a State (Alaska only)
 Tribal Block Group (current)
 Tribal Census Tract (current)
