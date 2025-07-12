@@ -12,7 +12,7 @@ https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Ame
   - Download National File
 - Alaska Native Regional Corporation (current)
   -  Select a State (Alaska only)
-    - Download
+    -- Download
 - Tribal Block Group (current)
   - Download National File
 - Tribal Census Tract (current)
