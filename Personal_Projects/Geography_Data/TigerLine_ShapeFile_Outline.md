@@ -129,14 +129,21 @@ https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Pub
 
 #### School Districts 
 https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=School+Districts+%28Elementary%2C+Secondary+%26+Unified%29
-- National File
-
+- Elementary School District (Current)
+  - Select a State
+    - Download
+- Secondary School District (Current)
+  - Select a State
+    - Download
+- Unified School District (Current)
+  - Select a State
+    - Download
 
 
 
 #### States (and equivalents) 
 https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=States+and+Equivalent
-- National File
+- Download National File
 
 
 
@@ -147,26 +154,36 @@ https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Sta
 - Lower Chamber:
   - https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=State+Legislative+Districts+%28Lower+Chamber%29
 
+- State Legislative District - Lower Chamber (Current)
+  - Select a State
+    - Download
+- State Legislative District - Upper Chamber (Current)
+  - Select a State
+    - Download
 
 
 
-#### Subbarrio (Subminor Civil Divisions) 
+#### Subbarrio (Subminor Civil Divisions) (Current)
 https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Subminor+Civil+Divisions+%28Subbarrios%29
+- Select a State
+  - Puerto Rico
+  - Download
 
 
 
-
-Select a State
 #### Urban Areas 
 https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Urban+Areas
-- National File
-
+- 2010 Urban Areas (Current)
+  - Download National File 
+- 2020 Urban Areas (Current)
+  - Download National File
 
 
 
 #### ZIP Code Tabulation Areas (ZCTAs) 
 https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Zip+Code+Tabulation+Areas+%28ZCTAs%29
-- National File
+- 2020
+  - Download National File 
 
 
 
@@ -175,81 +192,96 @@ https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Zip
 
 #### All Lines 
 https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=All+Lines
-
+- Select a State
+  - Select a County
+    - Download 
 
 
 
 #### Coastline 
 https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Coastline
-
+- Download National File
 
 
 
 #### Landmarks 
 https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Landmarks
-
+- Area Landmark
+  - Select a State
+    - Download
+- Point Landmark
+  - Select a State
+    - Download 
 
 
 
 #### Roads 
 https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Roads
-
+- Primary Roads
+  - Download National File
+- Primary and Secondary Roads
+  - Select a State
+    - Download
+- All Roads
+  - Select a State
+    - Select a County
+      - Download
 
 
 
 #### Rails 
 https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Rails
-
+- Download National File
 
 
 
 #### Military Installations 
 https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Military+Installations
-
+- Download National File
 
 
 
 #### Water
 https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Water
-###### **Area Hydrography**
-  **Select a State
-    **Select a County
-     **Download**
-###### **Linear Hydrography**
-  **Select a State
-    **Select a County
-     **Download**
+- Area Hydrography
+  - Select a State
+    - Select a County
+      - Download
+- Linear Hydrography
+  - Select a State
+    - Select a County
+      - Download
 
 ## <u> Relationship Files </u>
 #### Future Relationship 
 Files https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2021&layergroup=Relationship+Files
-**Address Ranges Relationship File**
-  **Select a State
-    **Select a County
-     **Download**
-**Address Range-Feature Shapefile**
-  **Select a State
-    **Select a County
-     **Download**
-**Address Range-Feature Name Relationship File**
-  **Select a State
-    **Select a County
-     **Download**
-**Topological Faces (Polygons with all Geocodes) Shapefile**
-  **Select a State
-    **Select a County
-     **Download**
-**Topological Faces-Area Hydrography Relationship File**
-  **Select a State
-    **Select a County
-     **Download**
-**Topological Faces-Area Landmark Relationship File**
-  **Select a State
-   **Download**
-**Topological Faces-Military Installations Relationship File**
-  **National File
-   **Download**
-**Feature Names Relationship File**
-  **Select a State
-    **Select a County
-     **Download**
+- Address Ranges Relationship File
+  - Select a State
+    - Select a County
+      - Download
+- Address Range-Feature Shapefile
+  - Select a State
+    - Select a County
+      - Download
+- Address Range-Feature Name Relationship File
+  - Select a State
+    - Select a County
+      - Download
+- Topological Faces (Polygons with all Geocodes) Shapefile
+  - Select a State
+    - Select a County
+      - Download
+- Topological Faces-Area Hydrography Relationship File
+  - Select a State
+    - Select a County
+      - Download
+- Topological Faces-Area Landmark Relationship File
+  - Select a State
+    - Download
+- Topological Faces-Military Installations Relationship File
+  - National File
+    - Download
+- Feature Names Relationship File
+  - Select a State
+    - Select a County
+      - Download
