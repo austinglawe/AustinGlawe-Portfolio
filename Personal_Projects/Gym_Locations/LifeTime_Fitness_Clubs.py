@@ -77,18 +77,71 @@ for club in clubs:
                         "Phone", "Address", "Latitude", "Longitude", "Today's Hours", "Amenities"]})
             for day in ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]:
                 club[f"{day} Hours"] = ""
+        # Membership info page
+        membership_url = club["Link"].replace(".html", "/memberships.html")
+        mem_resp = requests.get(membership_url, headers=headers, timeout=10)
+        mem_soup = BeautifulSoup(mem_resp.text, "html.parser")
+
+        # Updated: Loop through all tabs for membership prices
+        club["Membership Tiers"] = ""
+        club["Standard Price"] = ""
+        club["Signature Price"] = ""
+        club["26 and Under Price"] = ""
+        club["65 Plus Price"] = ""
+
+        for tab in mem_soup.select("div.tab-content > div.tab-pane"):
+            membership_name = ""
+            price = ""
+
+            tab_id = tab.get("id", "")
+            tab_button = mem_soup.select_one(
+                f'button[data-bs-target="#{tab_id}"]')
+            if tab_button:
+                membership_name = tab_button.get_text(strip=True)
+
+            price_span = tab.select_one(".join-offers-price .price")
+            if price_span:
+                price = price_span.get_text(strip=True)
+
+            if "standard" in membership_name.lower():
+                club["Standard Price"] = price
+            elif "signature" in membership_name.lower():
+                club["Signature Price"] = price
+            elif "26" in membership_name:
+                club["26 and Under Price"] = price
+            elif "65" in membership_name:
+                club["65 Plus Price"] = price
+
+            club["Membership Tiers"] += f"{membership_name}: {price} | "
+
+        def get_features_list_by_heading(heading_text):
+            heading = mem_soup.find(
+                lambda tag: tag.name == "h3" and heading_text in tag.text)
+            if heading:
+                ul = heading.find_next("ul")
+                if ul:
+                    return "|".join([li.get_text(strip=True) for li in ul.find_all("li")])
+            return ""
+
+        club["Exclusive Amenities"] = get_features_list_by_heading("Exclusive")
+        club["Included in All"] = get_features_list_by_heading("Included")
+        club["Not Included"] = get_features_list_by_heading("Not included")
 
     except Exception as e:
         print(f"Failed to process: {club['Link']} - {e}")
-        club.update({k: "" for k in [
-                    "Phone", "Address", "Latitude", "Longitude", "Today's Hours", "Amenities"]})
+        default_fields = [
+            "Phone", "Address", "Latitude", "Longitude", "Amenity Features",
+            "Standard Price", "Signature Price", "26 and Under Price", "65 Plus Price",
+            "Exclusive Amenities", "Not Included", "Included in All"
+        ]
+        for field in default_fields:
+            club[field] = ""
         for day in ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]:
             club[f"{day} Hours"] = ""
 
     time.sleep(0.5)
 
-# Step 3: Export to Excel
+# Export to Excel
 df = pd.DataFrame(clubs)
-df.to_excel("lifetime_clubs_json_ld.xlsx", index=False)
-print("Saved to 'lifetime_clubs_json_ld.xlsx'")
-
+df.to_excel("lifetime_clubs.xlsx", index=False)
+print("Saved to 'lifetime_clubs.xlsx'")
