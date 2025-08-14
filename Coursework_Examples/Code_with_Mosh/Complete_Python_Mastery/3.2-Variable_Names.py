@@ -9,4 +9,4 @@ course_name = "python programming"
 # 2. Lowercase letters are used to name variables. No capital letters.
 # 3. Used an underscore to separate multiple words. Spaces are not allowed for variables.
 # 4. Spaces on each side of the equal sign.
-# Make the code look pretty and like its telling a story.
+# Make the code look pretty and like it's telling a story.
