@@ -1,15 +1,14 @@
 Sub Add_All_Buttons()
-' Last Updated: 2025.07.02
+' Last Updated: 2025.08.25
 
 Dim ws As Worksheet
 Dim SheetExists As Boolean
 Dim wsAddReports As Worksheet
 Dim btnAddSingleReport As Button
 Dim btnAddMultipleReports As Button
-Dim btnSplitOutReports As Button
 Dim btnReset As Button
 Dim btnUpdate As Button
-
+'Dim btnSplitOutReports As Button
 
 ' Set the variable 'SheetExists' to false: saying that the 'Add Reports' worksheet does not yet exist.
     SheetExists = False
@@ -54,20 +53,9 @@ Dim btnUpdate As Button
                     .Font.Color = RGB(18, 154, 34)
                     .Font.Bold = True
                 End With
-                
-            ' 3. 'Split Out Reports' Button
-                Set btnSplitOutReports = wsAddReports.Buttons.Add(Left:=100, Top:=275, Width:=900, Height:=100)
-                With btnSplitOutReports
-                    .Caption = "CLICK HERE TO SPLIT OUT REPORTS"
-                    .OnAction = "SplitOut_Reports"
-                    .Name = "Button_SplitReports"
-                    .Font.Size = 55
-                    .Font.Color = RGB(255, 153, 51)
-                    .Font.Bold = True
-                End With
-            
-            ' 4. 'Reset' Button
-                Set btnReset = wsAddReports.Buttons.Add(Left:=100, Top:=400, Width:=900, Height:=100)
+
+            ' 3. 'Reset' Button
+                Set btnReset = wsAddReports.Buttons.Add(Left:=100, Top:=275, Width:=900, Height:=100)
                 With btnReset
                     .Caption = "CLICK HERE TO RESET WORKBOOK"
                     .OnAction = "Start_Reset"
@@ -77,8 +65,8 @@ Dim btnUpdate As Button
                     .Font.Bold = True
                 End With
                 
-            ' 5. 'Update' Button
-                Set btnUpdate = wsAddReports.Buttons.Add(Left:=100, Top:=525, Width:=900, Height:=100)
+            ' 4. 'Update' Button
+                Set btnUpdate = wsAddReports.Buttons.Add(Left:=100, Top:=400, Width:=900, Height:=100)
                 With btnUpdate
                     .Caption = "CLICK HERE TO UPDATE MENU LIST"
                     .OnAction = "Update_MealsLookup"
@@ -88,6 +76,18 @@ Dim btnUpdate As Button
                     .Font.Bold = True
                 End With
                 
+            ' 5. 'Split Out Reports' Button
+'                Set btnSplitOutReports = wsAddReports.Buttons.Add(Left:=100, Top:=525, Width:=900, Height:=100)
+'                With btnSplitOutReports
+'                    .Caption = "CLICK HERE TO SPLIT OUT REPORTS"
+'                    .OnAction = "SplitOut_Reports"
+'                    .Name = "Button_SplitReports"
+'                    .Font.Size = 55
+'                    .Font.Color = RGB(255, 153, 51)
+'                    .Font.Bold = True
+'                End With
+                
+   
         ' Protect the worksheet
             wsAddReports.Protect
         
