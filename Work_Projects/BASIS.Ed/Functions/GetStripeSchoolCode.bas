@@ -25,6 +25,9 @@ Public Function GetStripeSchoolCode(ByVal DisbursementID As Variant) As String
         ' Initial Creation Date  : 2025.11.20
         ' Production Rollout Date: 2025.11.20
 
+        ' Updates:
+            ' 2025.12.02 - Added new Disbursement IDs from November 2025 Click & Pledge sync that were missing School Codes.
+
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 ''''''''''-----------'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 '''''''''' Variables '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -146,6 +149,51 @@ Public Function GetStripeSchoolCode(ByVal DisbursementID As Variant) As String
             Case "po_1SIfexQgoLYKu1DKzF4AaArg": GetStripeSchoolCode = "61098"        ' (SPNE)
             Case "po_1SIfamHWV520qxl3WxeV7gVc": GetStripeSchoolCode = "35437"        ' (TUCN)
             Case "po_1SIfd4H0skVHdzk4YKFw8ITB": GetStripeSchoolCode = "35436"        ' (TUCP)
+
+        ' ==============================
+        '             2025.11
+        ' ==============================
+            Case "po_1SUyzaQXwlouwMgWS0gChHaa": GetStripeSchoolCode = "35418"        ' (AHW)
+            Case "po_1SUcqpQhnfWS9Eiv6OBSKEAo": GetStripeSchoolCode = "61369"        ' (AUS)
+            Case "po_1SUG2bQYaS7mQRKSvLYg8nvA": GetStripeSchoolCode = "61096"        ' (AUSP)
+            Case "po_1SUG2bQYaS7mQRKSvLYg8nvA": GetStripeSchoolCode = "61096"        ' (AUSP)
+            Case "po_1SUGAbH9wkJRSqOaolsjvkqc": GetStripeSchoolCode = "50884"        ' (BBRM)
+            Case "po_1SUFugHoHDbMF2midH3m8REt": GetStripeSchoolCode = "35412"        ' (BCSI)
+            Case "po_1SUFtRQYL6jHaUXMfrIVAxTH": GetStripeSchoolCode = "61620"        ' (BEN)
+            Case "po_1SUG4oH41tYMeeSK5KD4FfWo": GetStripeSchoolCode = "61367"        ' (BRMC)
+            Case "po_1SUGLhHzt9XZ7h60btrhKmKB": GetStripeSchoolCode = "35419"        ' (CHD)
+            Case "po_1SUFzlH837k8ldes49uEhmSB": GetStripeSchoolCode = "35468"        ' (CHPN)
+            Case "po_1SUGGkQjF0hKzNBkVDrMlTTY": GetStripeSchoolCode = "35422"        ' (CHPS)
+            Case "po_1SUGA0Qeaxl1oH0S0ML2X8Ra": GetStripeSchoolCode = "61773"        ' (CPK)
+            Case "po_1SUcimHnTW3OArEtfh0UQmx7": GetStripeSchoolCode = "60203"        ' (DC)
+            Case "po_1SUceGQePufX5iVQywUTPela": GetStripeSchoolCode = "35425"        ' (FLG)
+            Case "po_1SUzTJHgYDI9wgzhEPqSmf2Q": GetStripeSchoolCode = "35426"        ' (GDY)
+            Case "po_1SUzDNHUkZTU2PVIL5AXhkXM": GetStripeSchoolCode = "35440"        ' (GDYP)
+            Case "po_1SUFupQZOZg0F0QA31BIcWWp": GetStripeSchoolCode = "61623"        ' (JLJ)
+            Case "po_1SUys0H46HhwWaTC1R3gLR6Z": GetStripeSchoolCode = "35427"        ' (MES)
+            Case "po_1SUGPXHvTxXqOAZsTXbknKq0": GetStripeSchoolCode = "35428"        ' (OV)
+            Case "po_1SUytTHZjj5CWGhpqxc4dP2v": GetStripeSchoolCode = "35439"        ' (OVP)
+            Case "po_1SUGKMHbVYyrxVVwelJCcwY7": GetStripeSchoolCode = "35429"        ' (PEO)
+            Case "po_1SUGMIHv5cEoCFRKNpGdhW3k": GetStripeSchoolCode = "38139"        ' (PEOP)
+            Case "po_1SUccEH0K05F9mgHOKg04ZsZ": GetStripeSchoolCode = "61621"        ' (PFL)
+            Case "po_1SUGbUQVbVEP5TMTDE5N3qMx": GetStripeSchoolCode = "35430"        ' (PHX)
+            Case "po_1SUG4GHePa3cGmcJYSj00lgK": GetStripeSchoolCode = "35431"        ' (PHXC)
+            Case "po_1SUGRxHBO4JggQcHRwWdAany": GetStripeSchoolCode = "62053"        ' (PHXN)
+            Case "po_1SUGKHHFL7fIaoM6UKLwgRwW": GetStripeSchoolCode = "50885"        ' (PHXP)
+            Case "po_1SUGHDHW8Eo1hm07TmNAzxGp": GetStripeSchoolCode = "38346"        ' (PHXS)
+            Case "po_1SUGXxQahEPZfhTMoI69HgA1": GetStripeSchoolCode = "62375"        ' (PLN)
+            Case "po_1SUG7HHkv0Z5SiNeiLJyTtjH": GetStripeSchoolCode = "35432"        ' (PRE)
+            Case "po_1SUGOVQkAnjuwifxRhjsWTJS": GetStripeSchoolCode = "62376"        ' (RCH)
+            Case "po_1SUGCnHC1Kl6KxgMpILdH2Zj": GetStripeSchoolCode = "35441"        ' (SAMC)
+            Case "po_1SUG4PHRJOrVpM8z4qqarlmP": GetStripeSchoolCode = "35442"        ' (SANC)
+            Case "po_1SUFsmHQOHalnvHrow9wOgE5": GetStripeSchoolCode = "61097"        ' (SANE)
+            Case "po_1SUGN7HZSXdjvotc5gwicxue": GetStripeSchoolCode = "38511"        ' (SAS)
+            Case "po_1SUci0HcxeuzFJlhBz7YEFtw": GetStripeSchoolCode = "35433"        ' (SCD)
+            Case "po_1SUG36HmHwPibaAkTn8jD36o": GetStripeSchoolCode = "35435"        ' (SCPE)
+            Case "po_1SUz9uHbkaoiiKNoi5bgDpzr": GetStripeSchoolCode = "50886"        ' (SCPW)
+            Case "po_1SUGZmQgoLYKu1DK4ZnXVIuA": GetStripeSchoolCode = "61098"        ' (SPNE)
+            Case "po_1SUGWEHWV520qxl3T0J1fPOo": GetStripeSchoolCode = "35437"        ' (TUCN)
+            Case "po_1SUGEKH0skVHdzk4iyTvNJXN": GetStripeSchoolCode = "35436"        ' (TUCP)
         
         ' ==============================
         '             Not Found
