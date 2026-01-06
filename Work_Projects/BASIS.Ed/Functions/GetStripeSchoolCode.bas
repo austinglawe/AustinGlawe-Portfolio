@@ -20,12 +20,13 @@ Public Function GetStripeSchoolCode(ByVal DisbursementID As Variant) As String
     ' =============================================================
     '                           UPDATE LOG
     ' -------------------------------------------------------------
-    '                     (LAST UPDATED: 2025.12.02)
+    '                     (LAST UPDATED: 2026.01.05)
     ' =============================================================
         ' Initial Creation Date  : 2025.11.20
         ' Production Rollout Date: 2025.11.20
 
         ' Updates:
+            ' 2026.01.05 - Added new Disbursement IDs from December 2025 Click & Pledge sync that were missing School Codes.
             ' 2025.12.02 - Added new Disbursement IDs from November 2025 Click & Pledge sync that were missing School Codes.
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -194,7 +195,24 @@ Public Function GetStripeSchoolCode(ByVal DisbursementID As Variant) As String
             Case "po_1SUGZmQgoLYKu1DK4ZnXVIuA": GetStripeSchoolCode = "61098"        ' (SPNE)
             Case "po_1SUGWEHWV520qxl3T0J1fPOo": GetStripeSchoolCode = "35437"        ' (TUCN)
             Case "po_1SUGEKH0skVHdzk4iyTvNJXN": GetStripeSchoolCode = "35436"        ' (TUCP)
-        
+
+        ' ==============================
+        '             2025.12
+        ' ==============================
+            Case "po_1Sem1YQXwlouwMgWSB0UfHk5": GetStripeSchoolCode = "35418"        ' (AHW)
+            Case "po_1SelxlQYaS7mQRKSOaddWHZM": GetStripeSchoolCode = "61096"        ' (AUSP)
+            Case "po_1SelulHoHDbMF2midxQSOdqT": GetStripeSchoolCode = "35412"        ' (BCSI)
+            Case "po_1SelmcH41tYMeeSKp9sE6gSw": GetStripeSchoolCode = "61367"        ' (BRMC)
+            Case "po_1SelwSQjF0hKzNBkXivruKmc": GetStripeSchoolCode = "35422"        ' (CHPS)
+            Case "po_1SelrkQePufX5iVQFSruhNS4": GetStripeSchoolCode = "35425"        ' (FLG)
+            Case "po_1SeltoHgYDI9wgzhTP4qToFJ": GetStripeSchoolCode = "35426"        ' (GDY)
+            Case "po_1SelvAHbVYyrxVVwVUG9lCHs": GetStripeSchoolCode = "35429"        ' (PEO)
+            Case "po_1SelztH0K05F9mgHAmnT4YDR": GetStripeSchoolCode = "61621"        ' (PFL)
+            Case "po_1SelhmHW8Eo1hm07j3CKWUKm": GetStripeSchoolCode = "38346"        ' (PHXS)
+            Case "po_1SenaaQahEPZfhTM98RkiUzW": GetStripeSchoolCode = "62375"        ' (PLN)
+            Case "po_1SelxMHZSXdjvotcI9KWeNWe": GetStripeSchoolCode = "38511"        ' (SAS)
+            Case "po_1Sem2VQgoLYKu1DKu1z62qd0": GetStripeSchoolCode = "61098"        ' (SPNE)
+
         ' ==============================
         '             Not Found
         ' ==============================
