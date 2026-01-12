@@ -1,122 +1,156 @@
-# --------------------------------------------------------------
-# IMPORTS — WHAT THEY ARE AND WHY WE NEED THEM
-# --------------------------------------------------------------
+# ======================================================================
+# IMPORTS — WHAT THEY ARE AND WHY THEY ARE USED
+# ======================================================================
 
 import random
-# Used to generate random wait times between requests.
-# This prevents sending perfectly timed, bot-like requests.
+# We use random.uniform() to pick a random delay between requests so our
+# traffic pattern is less "bot-like" and more polite.
 
 import time
-# Provides time.sleep() for polite delays between page loads.
+# time.sleep() actually performs the wait between requests.
 
 from datetime import datetime
-# Used to generate a timestamp for output filenames.
+# datetime.now() is used to generate timestamps for file names, so you
+# can see exactly when each output was created.
 
 from zoneinfo import ZoneInfo
-# Ensures timestamps always use a consistent timezone ("America/Chicago").
+# This lets us pin timestamps to a specific time zone ("America/Chicago")
+# instead of using the machine's local time, which could change.
 
 import pandas as pd
-# Core data structure handling (DataFrame) and Excel export.
+# Pandas is used to:
+#   - Store all player rows in a DataFrame
+#   - Drop duplicates
+#   - Sort data
+#   - Export the results to an Excel file.
 
 from bs4 import BeautifulSoup
-# Parses HTML returned from Basketball-Reference.
+# BeautifulSoup turns HTML into a tree of tags that we can navigate.
+# We use it to find the players table and pull out the data we care about.
 
 from playwright.sync_api import sync_playwright
-# Controls a real browser (Chromium) to load dynamic BR content.
+# Playwright controls a real browser (Chromium). This is important
+# because Basketball-Reference often hides tables or uses dynamic content,
+# and a simple requests.get() might not see the full DOM.
 
 from openpyxl.utils import get_column_letter
-# Used for Excel column autofit functionality.
+# Used when "autofitting" Excel columns; we need to map 1 -> "A", 2 -> "B", etc.
 
 from openpyxl.styles import Alignment
-# Allows us to left-align header cells.
+# Lets us control cell alignment. We use it to left-align the header row.
 
 from openpyxl.worksheet.views import Selection
-# Used to select cell A1 by default when opening Excel.
-
-import os
-# Used for safe directory creation if needed.
+# Used to set which cell is "active" when you open the workbook (A1).
 
 
-# --------------------------------------------------------------
-# GLOBAL SETTINGS — USER CONFIGURATIONS
-# --------------------------------------------------------------
+# ======================================================================
+# USER CONFIGURATION — YOU CAN EDIT THESE VALUES
+# ======================================================================
 
 BASE_URL = "https://www.basketball-reference.com"
 
-# Letter range to scrape (script will auto-fix reversed inputs).
-START_LETTER = "b"
-END_LETTER = "a"
+# Starting and ending letters to scrape.
+# The script will automatically fix reversed ranges (e.g., START=B, END=A).
+START_LETTER = "a"
+END_LETTER = "z"
 
-# What outputs should be generated?
-INCLUDE_HTML = True           # Save raw HTML pages A-Z to a combined file.
-INCLUDE_PLAYER_DATA = True    # Parse player table into Excel.
-INCLUDE_SQL_SCRIPT = True     # Generate CREATE TABLE + INSERT statements.
+# Decide which outputs you want the script to produce.
+INCLUDE_HTML = True        # Save all raw HTML for A–Z into a text file.
+INCLUDE_PLAYER_DATA = True  # Parse player table into Excel.
+INCLUDE_SQL_SCRIPT = True  # Generate a SQLite-friendly SQL script.
 
-# Delay settings (politeness to the host website).
+# Delay range between requests (seconds).
 MIN_DELAY_SECONDS = 1.0
-MAX_DELAY_SECONDS = 3.0
+MAX_DELAY_SECONDS = 2.5
+
+# Name of the table in the generated SQL script.
+SQL_TABLE_NAME = "players"
 
 
-# --------------------------------------------------------------
-# LETTER NORMALIZATION — FIX INPUT RANGE
-# --------------------------------------------------------------
+# ======================================================================
+# LETTER RANGE HANDLING
+# ======================================================================
 
 def clamp_letters(start_letter_input: str, end_letter_input: str) -> tuple[str, str]:
     """
-    Normalize letter inputs and ensure the range is valid.
-    Example: if user enters B → A, this becomes A → B.
+    Clean up and validate the start/end letters.
+
+    - Ensure they are single characters.
+    - Force them into 'a'..'z'.
+    - If the order is reversed (e.g., 'c' to 'a'), swap them to 'a'..'c'.
+
+    This function prevents bad input from breaking the rest of the script.
     """
+    # Normalize input: default to "a" / "z", remove spaces, lower-case, take first char.
+    s = (start_letter_input or "a").strip().lower()[:1]
+    e = (end_letter_input or "z").strip().lower()[:1]
 
-    start_letter_normalized = (start_letter_input or "a").strip().lower()[:1]
-    end_letter_normalized = (end_letter_input or "z").strip().lower()[:1]
+    # If out of range, clamp to boundaries.
+    if not ("a" <= s <= "z"):
+        s = "a"
+    if not ("a" <= e <= "z"):
+        e = "z"
 
-    # Default invalid characters
-    if not ("a" <= start_letter_normalized <= "z"):
-        start_letter_normalized = "a"
-    if not ("a" <= end_letter_normalized <= "z"):
-        end_letter_normalized = "z"
+    # If the end is alphabetically before the start, swap them.
+    if e < s:
+        s, e = e, s
 
-    # Swap if reversed
-    if end_letter_normalized < start_letter_normalized:
-        start_letter_normalized, end_letter_normalized =
-        (
-            end_letter_normalized,
-            start_letter_normalized,
-        )
-
-    return start_letter_normalized, end_letter_normalized
+    return s, e
 
 
 def build_letter_range_list(start_letter: str, end_letter: str) -> list[str]:
-    """Return the list of letters between start and end inclusive."""
-    return [chr(x) for x in range(ord(start_letter), ord(end_letter) + 1)]
+    """
+    Build a list of letters from start to end inclusive.
+
+    Example:
+        start_letter = 'a', end_letter = 'c'
+        -> ['a', 'b', 'c']
+    """
+    return [chr(code) for code in range(ord(start_letter), ord(end_letter) + 1)]
 
 
-# --------------------------------------------------------------
+# ======================================================================
 # POLITE DELAY
-# --------------------------------------------------------------
+# ======================================================================
 
 def wait_politely():
-    """Sleep a random duration between MIN_DELAY_SECONDS and MAX_DELAY_SECONDS."""
-    delay = random.uniform(MIN_DELAY_SECONDS, MAX_DELAY_SECONDS)
-    time.sleep(delay)
+    """
+    Pause for a random amount of time between MIN_DELAY_SECONDS and
+    MAX_DELAY_SECONDS.
+
+    This helps:
+      - Avoid sending too many requests too quickly.
+      - Look less like an abusive bot.
+    """
+    time.sleep(random.uniform(MIN_DELAY_SECONDS, MAX_DELAY_SECONDS))
 
 
-# --------------------------------------------------------------
-# BUILD URL
-# --------------------------------------------------------------
+# ======================================================================
+# URL BUILDER
+# ======================================================================
 
 def build_players_letter_url(letter: str) -> str:
-    """Return the BR URL for a players list for a given letter."""
+    """
+    Given a letter like 'a', return the Basketball-Reference URL for
+    the players whose last names start with that letter.
+
+    Example:
+        'a' -> 'https://www.basketball-reference.com/players/a/'
+    """
     return f"{BASE_URL}/players/{letter}/"
 
 
-# --------------------------------------------------------------
-# DATA CONVERSION HELPERS
-# --------------------------------------------------------------
+# ======================================================================
+# SAFE CONVERSION UTILITIES
+# ======================================================================
 
 def safe_to_float(value: str):
-    """Convert to float or return None."""
+    """
+    Attempt to convert a string to float.
+    Return None if conversion fails.
+
+    This prevents exceptions when parsing slightly messy or missing data.
+    """
     try:
         return float(value)
     except Exception:
@@ -124,66 +158,97 @@ def safe_to_float(value: str):
 
 
 def safe_to_int(value: str):
-    """Convert to int or return None."""
+    """
+    Attempt to convert a string to int.
+    Return None if conversion fails.
+    """
     try:
         return int(value)
     except Exception:
         return None
 
 
-def inches_to_meters(height_inches: float | None):
-    """Convert inches → meters."""
-    return round(height_inches * 0.0254, 3) if height_inches is not None else None
-
-
-def pounds_to_kilograms(weight_pounds: int | None):
-    """Convert pounds → kg."""
-    return round(weight_pounds * 0.45359237, 3) if weight_pounds is not None else None
-
-
-def normalize_height_feet_inches(height_string: str):
+def inches_to_meters(inches):
     """
-    Convert "6-9" → "6-09".
-    Ensures consistent formatting and sorting.
+    Convert inches to meters, rounded to 3 decimal places.
+
+    If inches is None, return None (allows consistent 'no data' handling).
     """
-    if not height_string or "-" not in height_string:
-        return height_string
-    feet, inches = height_string.split("-", 1)
-    return f"{feet}-{inches.zfill(2)}"
+    return round(inches * 0.0254, 3) if inches is not None else None
 
 
-# --------------------------------------------------------------
-# PARSE THE PLAYERS TABLE HTML
-# --------------------------------------------------------------
+def pounds_to_kilograms(lb):
+    """
+    Convert pounds to kilograms, rounded to 3 decimal places.
+
+    If lb is None, return None.
+    """
+    return round(lb * 0.45359237, 3) if lb is not None else None
+
+
+def normalize_height_feet_inches(h):
+    """
+    Normalize height strings like "6-9" into "6-09" so they are consistent.
+
+    This helps:
+      - Data look cleaner.
+      - Sorting behave more predictably ("6-09" vs "6-10", etc.).
+    """
+    if not h or "-" not in h:
+        return h
+    ft, inch = h.split("-", 1)
+    return f"{ft}-{inch.zfill(2)}"
+
+
+# ======================================================================
+# HTML PARSER FOR THE PLAYERS TABLE
+# ======================================================================
 
 def parse_players_table_html(table_html: str, letter: str) -> list[dict]:
-    """Extract player info from the players table HTML."""
+    """
+    Given the HTML for the players table for a single letter, extract
+    each row and return a list of dictionaries (one per player).
+
+    This is where we translate "raw HTML" into structured data.
+    """
 
     soup = BeautifulSoup(table_html, "html.parser")
     tbody = soup.find("tbody")
     if not tbody:
         return []
 
-    extracted_rows = []
+    rows = []
 
+    # Each row in <tbody> corresponds to a player.
     for tr in tbody.find_all("tr", recursive=False):
 
+        # The "player" cell contains:
+        #   - the main link for the player
+        #   - the Hall of Fame star
+        #   - boldness for "Active"
         player_cell = tr.find(["th", "td"], attrs={"data-stat": "player"})
         if not player_cell:
             continue
 
+        # Unique Basketball-Reference ID (e.g., "jamesle01").
         unique_id = player_cell.get("data-append-csv", "") or ""
 
-        anchor_tag = player_cell.find("a")
-        if not anchor_tag or not anchor_tag.get("href"):
+        # Anchor tag with the link to the player's page.
+        link_tag = player_cell.find("a")
+        if not link_tag or not link_tag.get("href"):
             continue
 
-        player_name = anchor_tag.get_text(strip=True)
-        player_url = BASE_URL + anchor_tag["href"]
+        player_name = link_tag.get_text(strip=True)
+        player_url = BASE_URL + link_tag["href"]
 
-        hof_flag = "x" if "*" in player_cell.get_text(strip=True) else ""
-        active_flag = "Active" if player_cell.find("strong") else "Inactive"
+        # "*" in the text indicates Hall of Fame.
+        cell_text = player_cell.get_text(strip=True)
+        hall_of_fame = "x" if "*" in cell_text else ""
 
+        # Active players are bolded via <strong>.
+        status = "Active" if player_cell.find("strong") else "Inactive"
+
+        # Helper functions for cells.
         def get_text(stat):
             td = tr.find("td", attrs={"data-stat": stat})
             return td.get_text(strip=True) if td else ""
@@ -192,45 +257,51 @@ def parse_players_table_html(table_html: str, letter: str) -> list[dict]:
             td = tr.find("td", attrs={"data-stat": stat})
             return td.get(attr) if td else None
 
-        first_year = get_text("year_min")
-        last_year = get_text("year_max")
-        position = get_text("pos")
+        # Basic career info.
+        year_start = get_text("year_min")
+        year_end = get_text("year_max")
+        pos = get_text("pos")
 
-        height_ft_raw = get_text("height")
-        height_ft_norm = normalize_height_feet_inches(height_ft_raw)
+        # Height (string and normalized), plus inches and meters.
+        height_ft_in_raw = get_text("height")
+        height_ft_in = normalize_height_feet_inches(height_ft_in_raw)
 
-        height_in_raw = get_attr("height", "csk") or ""
-        height_in = safe_to_float(height_in_raw)
+        height_in = safe_to_float(get_attr("height", "csk") or "")
         height_m = inches_to_meters(height_in)
 
+        # Weight in lb and kg.
         weight_lb = safe_to_int(get_text("weight"))
         weight_kg = pounds_to_kilograms(weight_lb)
 
+        # Birth date: short (YYYY.MM.DD) and long formats.
         birth_csk = (get_attr("birth_date", "csk") or "").strip()
         birthday_short = (
             f"{birth_csk[0:4]}.{birth_csk[4:6]}.{birth_csk[6:8]}"
-            if len(birth_csk) == 8 else ""
+            if len(birth_csk) == 8
+            else ""
         )
         birthday_long = get_text("birth_date")
 
-        colleges_cell = tr.find("td", attrs={"data-stat": "colleges"})
+        # Colleges: may contain multiple <a> links; we join with " | ".
+        colleges_td = tr.find("td", attrs={"data-stat": "colleges"})
         colleges = ""
-        if colleges_cell:
-            colleges = " | ".join(a.get_text(strip=True)
-                                  for a in colleges_cell.find_all("a"))
+        if colleges_td:
+            colleges = " | ".join(
+                a.get_text(strip=True) for a in colleges_td.find_all("a")
+            )
 
-        extracted_rows.append({
+        rows.append({
             "letter": letter.upper(),
             "unique_id": unique_id,
             "player_name": player_name,
             "player_url": player_url,
-            "HOF": hof_flag,
-            "status": active_flag,
-            "year_start": first_year,
-            "year_end": last_year,
-            "pos": position,
+            "HOF": hall_of_fame,
+            "status": status,
+            "year_start": year_start,
+            "year_end": year_end,
+            "pos": pos,
             "height_in": height_in,
-            "height_ft_in": height_ft_norm,
+            "height_ft_in": height_ft_in,
             "height_m": height_m,
             "weight_lb": weight_lb,
             "weight_kg": weight_kg,
@@ -239,315 +310,327 @@ def parse_players_table_html(table_html: str, letter: str) -> list[dict]:
             "colleges": colleges,
         })
 
-    return extracted_rows
+    return rows
 
 
-# --------------------------------------------------------------
-# HTML FILE HEADER
-# --------------------------------------------------------------
+# ======================================================================
+# HTML FILE HEADER WRITER
+# ======================================================================
 
-def write_html_file_header(file_handle, title, start_letter, end_letter, timestamp):
-    """Write descriptive header text into HTML output file."""
-    file_handle.write(f"{title}\n")
-    file_handle.write(f"Letters: {start_letter.upper()}-{end_letter.upper()}\n")
-    file_handle.write(f"Generated: {timestamp} America/Chicago\n\n")
-
-
-# --------------------------------------------------------------
-# SILENT ROUTE HANDLER — NO CancelledError SPAM
-# --------------------------------------------------------------
-
-def safe_route_handler(route):
+def write_html_file_header(fh, title, start_letter, end_letter, timestamp):
     """
-    Abort images/css/fonts/media but suppress cancellation warnings.
-    Ensures a clean console output.
+    Write a small text header into the combined HTML dump file so you
+    know what letters it covers and when it was generated.
     """
-    try:
-        if route.request.resource_type in ["image", "stylesheet", "font", "media"]:
-            return route.abort()
-        return route.continue_()
-    except Exception:
-        pass  # Suppress harmless async warnings
+    fh.write(f"{title}\n")
+    fh.write(f"Letters: {start_letter.upper()}-{end_letter.upper()}\n")
+    fh.write(f"Generated: {timestamp} America/Chicago\n\n")
 
 
-# --------------------------------------------------------------
-# ESCAPING FOR SQL (APOSTROPHES)
-# --------------------------------------------------------------
+# ======================================================================
+# SQL ESCAPING
+# ======================================================================
 
-def escape_sql_string(value: str):
-    """Escape apostrophes for SQLite by doubling them."""
-    return value.replace("'", "''") if isinstance(value, str) else value
-
-
-# --------------------------------------------------------------
-# SQL SCRIPT GENERATION
-# --------------------------------------------------------------
-
-def generate_sql_script(
-    file_path: str,
-    start_letter: str,
-    end_letter: str,
-    timestamp_string: str,
-    rows: list[dict]
-):
+def sql_escape(value):
     """
-    Write out a full SQLite SQL script including:
-      - Comments
-      - CREATE TABLE
-      - INSERT statements (one per row)
+    Escape a Python value for safe use in a SQLite INSERT statement.
+
+    - If value is None, return the literal SQL NULL (no quotes).
+    - Otherwise, convert to string, escape any apostrophes by doubling them,
+      and wrap in single quotes.
+
+    Example:
+      "O'Brien" -> 'O''Brien'
+    """
+    if value is None:
+        return "NULL"
+    text = str(value).replace("'", "''")
+    return f"'{text}'"
+
+
+# ======================================================================
+# SQL SCRIPT GENERATOR
+# ======================================================================
+
+def generate_sql_script(rows: list[dict], table_name: str) -> str:
+    """
+    Build a full SQLite SQL script that:
+
+      1. Drops the table if it exists.
+      2. Creates the table with columns matching our data.
+      3. Inserts every row of scraped player data.
+
+    The result is a single string you can write to a .txt file and later
+    execute in SQLite.
     """
 
-    with open(file_path, "w", encoding="utf-8") as sql_file:
+    sql_lines = []
 
-        # ------------------------------------------
-        # HEADER COMMENTS
-        # ------------------------------------------
-        sql_file.write("-- ================================================\n")
-        sql_file.write("-- Basketball-Reference Players A-Z SQL Export\n")
-        sql_file.write(f"-- Letters: {start_letter.upper()}-{end_letter.upper()}\n")
-        sql_file.write(f"-- Generated: {timestamp_string} America/Chicago\n")
-        sql_file.write("-- ================================================\n\n")
+    # Drop any old version of the table so the script is idempotent.
+    sql_lines.append(f"DROP TABLE IF EXISTS {table_name};")
+    sql_lines.append("")
 
-        sql_file.write("-- Column Descriptions:\n")
-        sql_file.write("-- unique_id: Basketball-Reference unique player id\n")
-        sql_file.write("-- player_name: Player's full displayed name\n")
-        sql_file.write("-- letter: A-Z grouping based on BR players list\n")
-        sql_file.write("-- player_url: URL to player's profile page\n")
-        sql_file.write("-- HOF: 'x' if Hall of Fame\n")
-        sql_file.write("-- status: 'Active' or 'Inactive'\n")
-        sql_file.write("-- year_start: First season\n")
-        sql_file.write("-- year_end: Final season\n")
-        sql_file.write("-- pos: Position\n")
-        sql_file.write("-- height_in: Height in inches\n")
-        sql_file.write("-- height_ft_in: Height in feet-inches format\n")
-        sql_file.write("-- height_m: Height in meters\n")
-        sql_file.write("-- weight_lb: Weight in pounds\n")
-        sql_file.write("-- weight_kg: Weight in kilograms\n")
-        sql_file.write("-- birthday: YYYY.MM.DD\n")
-        sql_file.write("-- birthday_long: Long birth date\n")
-        sql_file.write("-- colleges: Colleges attended\n\n")
+    # Create the table with columns aligned to our output schema.
+    sql_lines.append(f"CREATE TABLE {table_name} (")
+    sql_lines.append("    letter TEXT,")
+    sql_lines.append("    unique_id TEXT,")
+    sql_lines.append("    player_name TEXT,")
+    sql_lines.append("    player_url TEXT,")
+    sql_lines.append("    HOF TEXT,")
+    sql_lines.append("    status TEXT,")
+    sql_lines.append("    year_start TEXT,")
+    sql_lines.append("    year_end TEXT,")
+    sql_lines.append("    pos TEXT,")
+    sql_lines.append("    height_in REAL,")
+    sql_lines.append("    height_ft_in TEXT,")
+    sql_lines.append("    height_m REAL,")
+    sql_lines.append("    weight_lb INTEGER,")
+    sql_lines.append("    weight_kg REAL,")
+    sql_lines.append("    birthday TEXT,")
+    sql_lines.append("    birthday_long TEXT,")
+    sql_lines.append("    colleges TEXT")
+    sql_lines.append(");")
+    sql_lines.append("")
 
-        # ------------------------------------------
-        # CREATE TABLE
-        # ------------------------------------------
-        sql_file.write("CREATE TABLE nba_players (\n")
-        sql_file.write("    unique_id TEXT PRIMARY KEY,\n")
-        sql_file.write("    player_name TEXT,\n")
-        sql_file.write("    letter TEXT,\n")
-        sql_file.write("    player_url TEXT,\n")
-        sql_file.write("    HOF TEXT,\n")
-        sql_file.write("    status TEXT,\n")
-        sql_file.write("    year_start INTEGER,\n")
-        sql_file.write("    year_end INTEGER,\n")
-        sql_file.write("    pos TEXT,\n")
-        sql_file.write("    height_in REAL,\n")
-        sql_file.write("    height_ft_in TEXT,\n")
-        sql_file.write("    height_m REAL,\n")
-        sql_file.write("    weight_lb INTEGER,\n")
-        sql_file.write("    weight_kg REAL,\n")
-        sql_file.write("    birthday TEXT,\n")
-        sql_file.write("    birthday_long TEXT,\n")
-        sql_file.write("    colleges TEXT\n")
-        sql_file.write(");\n\n")
+    # Generate one INSERT statement per row.
+    for row in rows:
+        insert_line = (
+            f"INSERT INTO {table_name} VALUES ("
+            f"{sql_escape(row['letter'])}, "
+            f"{sql_escape(row['unique_id'])}, "
+            f"{sql_escape(row['player_name'])}, "
+            f"{sql_escape(row['player_url'])}, "
+            f"{sql_escape(row['HOF'])}, "
+            f"{sql_escape(row['status'])}, "
+            f"{sql_escape(row['year_start'])}, "
+            f"{sql_escape(row['year_end'])}, "
+            f"{sql_escape(row['pos'])}, "
+            f"{row['height_in'] if row['height_in'] is not None else 'NULL'}, "
+            f"{sql_escape(row['height_ft_in'])}, "
+            f"{row['height_m'] if row['height_m'] is not None else 'NULL'}, "
+            f"{row['weight_lb'] if row['weight_lb'] is not None else 'NULL'}, "
+            f"{row['weight_kg'] if row['weight_kg'] is not None else 'NULL'}, "
+            f"{sql_escape(row['birthday'])}, "
+            f"{sql_escape(row['birthday_long'])}, "
+            f"{sql_escape(row['colleges'])}"
+            f");"
+        )
+        sql_lines.append(insert_line)
 
-        # ------------------------------------------
-        # INSERT STATEMENTS
-        # ------------------------------------------
-        sql_file.write("-- ================================================\n")
-        sql_file.write("-- INSERT PLAYER ROWS\n")
-        sql_file.write("-- ================================================\n\n")
-
-        for row in rows:
-
-            # Escape apostrophes
-            safe_row = {k: escape_sql_string(v) for k, v in row.items()}
-
-            sql_file.write(
-                "INSERT INTO nba_players (unique_id, player_name, letter, "
-                "player_url, HOF, status, year_start, year_end, pos, height_in, "
-                "height_ft_in, height_m, weight_lb, weight_kg, birthday, "
-                "birthday_long, colleges)\n"
-            )
-
-            sql_file.write("VALUES (\n")
-            sql_file.write(f"    '{safe_row['unique_id']}',\n")
-            sql_file.write(f"    '{safe_row['player_name']}',\n")
-            sql_file.write(f"    '{safe_row['letter']}',\n")
-            sql_file.write(f"    '{safe_row['player_url']}',\n")
-            sql_file.write(f"    '{safe_row['HOF']}',\n")
-            sql_file.write(f"    '{safe_row['status']}',\n")
-            sql_file.write(f"    {safe_row['year_start'] if safe_row['year_start'] else 'NULL'},\n")
-            sql_file.write(f"    {safe_row['year_end'] if safe_row['year_end'] else 'NULL'},\n")
-            sql_file.write(f"    '{safe_row['pos']}',\n")
-            sql_file.write(f"    {safe_row['height_in'] if safe_row['height_in'] else 'NULL'},\n")
-            sql_file.write(f"    '{safe_row['height_ft_in']}',\n")
-            sql_file.write(f"    {safe_row['height_m'] if safe_row['height_m'] else 'NULL'},\n")
-            sql_file.write(f"    {safe_row['weight_lb'] if safe_row['weight_lb'] else 'NULL'},\n")
-            sql_file.write(f"    {safe_row['weight_kg'] if safe_row['weight_kg'] else 'NULL'},\n")
-            sql_file.write(f"    '{safe_row['birthday']}',\n")
-            sql_file.write(f"    '{safe_row['birthday_long']}',\n")
-            sql_file.write(f"    '{safe_row['colleges']}'\n")
-            sql_file.write(");\n\n")
+    return "\n".join(sql_lines)
 
 
-# --------------------------------------------------------------
-# MAIN PROGRAM
-# --------------------------------------------------------------
+# ======================================================================
+# MAIN SCRIPT
+# ======================================================================
 
 def main():
+    """
+    Orchestrate the full process:
 
-    # Normalize letters
-    start_letter_normalized, end_letter_normalized =
-    clamp_letters(START_LETTER, END_LETTER)
+      1. Normalize and validate letter range.
+      2. Build output file names.
+      3. Use Playwright to visit each letter page.
+      4. Optionally dump combined HTML.
+      5. Optionally parse player data into Excel.
+      6. Optionally generate a SQLite SQL script.
+    """
 
-    # Timestamp for filenames
-    timestamp_string = datetime.now(ZoneInfo("America/Chicago")).strftime(
+    # Step 1: Normalize letters (fix reversed inputs).
+    start_letter, end_letter = clamp_letters(START_LETTER, END_LETTER)
+
+    # Step 2: Build a timestamp string for filenames.
+    timestamp = datetime.now(ZoneInfo("America/Chicago")).strftime(
         "%Y.%m.%d-%H.%M.%S"
     )
 
-    # File name base
-    base_file_name = (
-        f"BR Players A-Z ("
-        f"{start_letter_normalized.upper()}-{end_letter_normalized.upper()}) "
-        f"as of {timestamp_string}"
+    # Step 3: Construct base filename so all outputs line up neatly in a folder.
+    base_filename = (
+        f"BR Players A-Z ({start_letter.upper()}-{end_letter.upper()}) "
+        f"as of {timestamp}"
     )
 
-    html_file_name = f"{base_file_name} HTML.txt"
-    excel_file_name = f"{base_file_name}.xlsx"
-    sql_file_name = f"{base_file_name} SQL SCRIPT.txt"
+    # Derived filenames for each kind of output.
+    html_filename = f"{base_filename} HTML.txt"
+    excel_filename = f"{base_filename}.xlsx"
+    sql_filename = f"{base_filename} SQL SCRIPT.txt"
 
-    letters = build_letter_range_list(start_letter_normalized, end_letter_normalized)
+    # Build the list of letters to process.
+    letters = build_letter_range_list(start_letter, end_letter)
+
+    # This list will store all parsed player rows from all letters.
     all_rows = []
 
-    # Start Playwright
+    # Step 4: Use Playwright to browse the site.
     with sync_playwright() as pw:
         browser = pw.chromium.launch(headless=True)
         page = browser.new_page()
 
-        # Silent blocking of heavy resources
-        page.route("**/*", safe_route_handler)
+        # NOTE: We intentionally do NOT use page.route() here.
+        #   - Using route() caused noisy async CancelledError logs when the
+        #     browser shut down.
+        #   - We remove it to keep the console clean and error-free, at the
+        #     cost of downloading images/CSS/fonts (minimal impact).
 
-        html_handle = None
-        if INCLUDE_HTML:
-            html_handle = open(html_file_name, "w", encoding="utf-8")
+        # Open the HTML dump file if requested.
+        html_file = open(html_filename, "w",
+                         encoding="utf-8") if INCLUDE_HTML else None
+
+        # If we have an HTML file, write a header at the top.
+        if html_file:
             write_html_file_header(
-                html_handle,
+                html_file,
                 "Basketball-Reference players A-Z pages",
-                start_letter_normalized,
-                end_letter_normalized,
-                timestamp_string,
+                start_letter,
+                end_letter,
+                timestamp,
             )
 
         try:
-            for idx, letter in enumerate(letters, start=1):
+            total = len(letters)
+
+            for i, letter in enumerate(letters, start=1):
 
                 url = build_players_letter_url(letter)
-                print(f"[{idx}/{len(letters)}] Downloading '{letter.upper()}': {url}")
+                print(f"[{i}/{total}] Downloading {letter.upper()}: {url}")
 
-                # Load page
+                # Load the page for this letter.
                 page.goto(url, wait_until="domcontentloaded", timeout=60000)
-                page.wait_for_timeout(500)
+                page.wait_for_timeout(500)  # Small extra wait for stability.
 
-                # Save HTML
-                if INCLUDE_HTML and html_handle:
+                # --------------------------
+                # OPTIONAL: SAVE RAW HTML
+                # --------------------------
+                if html_file:
                     html = page.content()
-                    section_header = (
-                        "\n" + "=" * 120 + "\n" +
-                        f"BEGIN LETTER {letter.upper()} | URL {url}\n" +
-                        "=" * 120 + "\n"
-                    )
-                    section_footer = (
-                        "\n" + "-" * 120 + "\n" +
-                        f"END LETTER {letter.upper()}\n" +
-                        "-" * 120 + "\n"
-                    )
-                    html_handle.write(section_header)
-                    html_handle.write(html)
-                    html_handle.write(section_footer)
+                    html_file.write("\n" + "=" * 120 + "\n")
+                    html_file.write(
+                        f"BEGIN LETTER {letter.upper()} | URL {url}\n")
+                    html_file.write("=" * 120 + "\n")
+                    html_file.write(html)
+                    html_file.write("\n" + "-" * 120 + "\n")
+                    html_file.write(f"END LETTER {letter.upper()}\n")
+                    html_file.write("-" * 120 + "\n")
 
-                # Parse data
+                # --------------------------
+                # OPTIONAL: PARSE PLAYER DATA
+                # --------------------------
                 if INCLUDE_PLAYER_DATA:
-                    page.wait_for_selector("table#players", state="attached", timeout=60000)
+                    # Wait until the players table is attached to the DOM.
+                    page.wait_for_selector(
+                        "table#players",
+                        state="attached",
+                        timeout=60000,
+                    )
+
+                    # Pull just the <table> HTML and feed it to BeautifulSoup.
                     table_html = page.locator("table#players").evaluate(
-                        "el => el.outerHTML")
+                        "el => el.outerHTML"
+                    )
+
                     rows = parse_players_table_html(table_html, letter)
                     print(f"{letter.upper()}: extracted {len(rows)} players")
+
                     all_rows.extend(rows)
 
+                # Respectful delay before the next letter.
                 wait_politely()
 
         finally:
-            if html_handle:
-                html_handle.close()
+            # Ensure resources are closed even if something goes wrong.
+            if html_file:
+                html_file.close()
             browser.close()
 
-    # ----------------------------------------------------------
+    # ==================================================================
     # EXCEL OUTPUT
-    # ----------------------------------------------------------
+    # ==================================================================
     if INCLUDE_PLAYER_DATA and all_rows:
 
+        # Create a DataFrame from all collected rows.
         df = pd.DataFrame(all_rows)
-        df = df.drop_duplicates(subset=["unique_id"])
-        df = df.sort_values(["letter", "player_name"]).reset_index(drop=True)
 
-        # Desired column order
-        desired_cols = [
-            "letter", "unique_id", "player_name", "player_url",
-            "HOF", "status",
-            "year_start", "year_end", "pos",
-            "height_in", "height_ft_in", "height_m",
-            "weight_lb", "weight_kg",
-            "birthday", "birthday_long", "colleges"
+        # Drop duplicate players by unique_id and sort by letter + name.
+        df = (
+            df.drop_duplicates(subset=["unique_id"])
+              .sort_values(["letter", "player_name"])
+              .reset_index(drop=True)
+        )
+
+        # Ensure columns are in the desired order (and only use those that exist).
+        columns = [
+            "letter",
+            "unique_id",
+            "player_name",
+            "player_url",
+            "HOF",
+            "status",
+            "year_start",
+            "year_end",
+            "pos",
+            "height_in",
+            "height_ft_in",
+            "height_m",
+            "weight_lb",
+            "weight_kg",
+            "birthday",
+            "birthday_long",
+            "colleges",
         ]
-        df = df[[c for c in desired_cols if c in df.columns]]
+        df = df[[c for c in columns if c in df.columns]]
 
-        with pd.ExcelWriter(excel_file_name, engine="openpyxl") as writer:
+        # Write to Excel using openpyxl so we can format.
+        with pd.ExcelWriter(excel_filename, engine="openpyxl") as writer:
+
             df.to_excel(writer, index=False, sheet_name="NBA Players")
+
             ws = writer.sheets["NBA Players"]
 
-            # Filter on top row
+            # Add filter to header row.
             ws.auto_filter.ref = ws.dimensions
 
-            # Left align headers
+            # Left-align header text.
             for cell in ws[1]:
                 cell.alignment = Alignment(horizontal="left")
 
-            # Autofit columns
-            for col_idx, col_cells in enumerate(ws.columns, start=1):
-                max_len = max(
-                    (len(str(cell.value)) if cell.value is not None else 0)
-                    for cell in col_cells
-                )
-                ws.column_dimensions[get_column_letter(col_idx)].width = max_len + 2
+            # Autofit all columns by scanning their max text length.
+            for col_idx, col in enumerate(ws.columns, start=1):
+                max_len = 0
+                for cell in col:
+                    if cell.value:
+                        max_len = max(max_len, len(str(cell.value)))
+                ws.column_dimensions[get_column_letter(
+                    col_idx)].width = max_len + 2
 
-            # Select A1 by default
+            # Make A1 the active cell when the workbook is opened.
             ws.sheet_view.selection = [Selection(activeCell="A1", sqref="A1")]
 
-        print(f"\nSaved Excel data file: {excel_file_name}")
+        print(f"Saved Excel file: {excel_filename}")
 
-    # ----------------------------------------------------------
-    # SQL SCRIPT OUTPUT
-    # ----------------------------------------------------------
+    # ==================================================================
+    # SQL OUTPUT
+    # ==================================================================
     if INCLUDE_SQL_SCRIPT and all_rows:
-        generate_sql_script(
-            sql_file_name,
-            start_letter_normalized,
-            end_letter_normalized,
-            timestamp_string,
-            all_rows
-        )
-        print(f"Saved SQL script file: {sql_file_name}")
 
-    # ----------------------------------------------------------
-    # HTML MESSAGE
-    # ----------------------------------------------------------
+        # Build the SQL script text.
+        sql_script_text = generate_sql_script(all_rows, SQL_TABLE_NAME)
+
+        # Write it to a .txt file (not .sql, per your preference).
+        with open(sql_filename, "w", encoding="utf-8") as f:
+            f.write(sql_script_text)
+
+        print(f"Saved SQL script: {sql_filename}")
+
+    # ==================================================================
+    # HTML OUTPUT MESSAGE
+    # ==================================================================
     if INCLUDE_HTML:
-        print(f"Saved combined HTML file: {html_file_name}")
+        print(f"Saved combined HTML file: {html_filename}")
 
 
-# --------------------------------------------------------------
+# ======================================================================
 # ENTRY POINT
-# --------------------------------------------------------------
+# ======================================================================
 
 if __name__ == "__main__":
     main()
