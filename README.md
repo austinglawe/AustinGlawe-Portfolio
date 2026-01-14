@@ -14,7 +14,7 @@ This repository contains sanitized examples of:
 ## Project Categories
 
 - **Work_Projects/** — Examples from professional roles
-- **Contract_Projects/** — Code from freelance/contract positions
+- **Contract_Projects/** — Examples of code from freelance/contract positions
 - **Personal_Projects/** — Independent coding and automation projects
 - **Coursework_Examples/** — Code from different courses I have completed online
 
