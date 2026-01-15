@@ -1,0 +1,18 @@
+Process Overview
+--Prior to 
+--New Process
+
+Challenges
+-- Creating a easily-searchable standardized naming convention
+-- Converting PDF to Excel
+-- Once converted to Excel, misaligning columns
+-- Checks needs to be turned from 3 columns into 1 column
+-- consolidating all the data into 1 worksheet
+-- consolidating all schools for all months or 1 school and 1 month at a time.
+-- creating a unique id for each transaction
+-- connecting each transaction to their corresponding origin
+-- organizing and predicting naming conventions from origin site to easily match bank deposit names
+-- creating unique disbursement naming conventions across all platforms to easily match to the bank deposits
+-- Double checking all parameters match up (creating a summary page)
+-- creating functions specific to this converter
+-- bringing over and consolidating the worksheets and data into 1 workbook
