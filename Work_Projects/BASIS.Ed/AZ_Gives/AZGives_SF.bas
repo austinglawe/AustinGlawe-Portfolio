@@ -1,4 +1,4 @@
-Sub AZGives_SF_Converter()
+Sub AZGives_SF()
 ' ==============================================================
 ' MODULE: AZGives_SF
 ' AUTHOR: Austin Glawe
