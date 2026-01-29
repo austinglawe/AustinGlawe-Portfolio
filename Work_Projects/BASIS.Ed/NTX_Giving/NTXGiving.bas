@@ -34,6 +34,7 @@ Sub NTXGiving_SF()
 
         ' Updates:
             ' 2026.01.28 - Initiated the update log.
+            '
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 ''''''''''------------------------------''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -81,7 +82,7 @@ Sub NTXGiving_SF()
         
             ' The naming convention used when describing where the relevant data is coming from
             ' As of the most recent update, this is how the DonationSite name appears in Salesforce and Intacct.
-                DonationSite = "NTXGiving"
+                DonationSite = "NTX Giving Day"
                 
             ' ...............................
             ' Possible Headers
@@ -266,7 +267,7 @@ Sub NTXGiving_SF()
                     "1. A report downloaded from the North Texas Giving donation site." & vbCrLf & _
                     "2. The Disbursement ID from the individual disbursement page." & vbCrLf & _
                     "3. Whether the transaction fees were reimbursed." & vbCrLf & _
-                    "4. Whether an additional prize was awarded by North Texas Giving and, if so, the prize description name for it." & vbCrLf & vbCrLf & _
+                    "4. Whether an additional prize was awarded by North Texas Giving and, if so, the prize amount and description name for it." & vbCrLf & vbCrLf & _
                 "Are you ready to continue?", _
                 vbYesNo + vbQuestion, _
                 "North Texas Giving – SF Converter Confirmation")
@@ -1049,16 +1050,10 @@ NextRow:
             wsSFImport.Range("M2").Formula = "=""EFT"""
             
         ' "Campaign Name"
-            wsSFImport.Range("N2").Formula2 = "=A2&"" ""&" & _
-                                                "IF(MONTH(E2)>6," & _
-                                                    "RIGHT(E2,4)&""-""&(RIGHT(E2,2)+1)," & _
-                                                    "IF(MONTH(F2)>8," & _
-                                                        "RIGHT(E2,4)&""-""&(RIGHT(E2,2)+1)," & _
-                                                        """""" & _
-                                                    ")" & _
-                                                ")&"" ""&" & _
-                                                "IF(LEFT(A2,5)=""BASIS"",""ATF"",""ATF North Texas Giving Day"")"
-
+            ' (Transaction Date - Greater than June, it falls into the next fiscal year;
+            ' If the Transaction Date is not greater than June but the Deposit Date falls after August, then it is past the time for Accruals and it needs to go into the next fiscal year;
+            ' Otherwise it falls into the fiscal year of the year of the transaction.
+            wsSFImport.Range("N2").Formula2 = "=A2&"" ""&IF(MONTH(E2)>6,RIGHT(E2,4)&""-""&(RIGHT(E2,2)+1),IF(MONTH(F2)>8,RIGHT(E2,4)&""-""&(RIGHT(E2,2)+1),MID(E2,7,2)&RIGHT(E2,2)-1&""-""&(RIGHT(E2,2))))&"" ""&IF(LEFT(A2,5)=""BASIS"",""ATF"","" ATF NTX Giving Day"")"
             
         ' "Donation Name" (Opportunity Name)
             wsSFImport.Range("O2").Formula = "=XLOOKUP(A2,'School Validation'!A:A,'School Validation'!C:C)&"" ATF NTX Giving Day Donation"""
@@ -1067,7 +1062,7 @@ NextRow:
             wsSFImport.Range("P2").Value = DonationSite
             
         ' "Description"
-            wsSFImport.Range("Q2").Formula = "="""""
+            wsSFImport.Range("Q2").Formula = DonationSite
             
         ' "Notes"
             wsSFImport.Range("R2").Formula = "=IF(ISBLANK('Donation Site Report'!BG2),"""",'Donation Site Report'!BG2)"
