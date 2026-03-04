@@ -173,7 +173,6 @@ Public Function GetStripeSchoolCode(ByVal DisbursementID As Variant) As String
             Case "po_1SUyzaQXwlouwMgWS0gChHaa": GetStripeSchoolCode = "35418"       ' (AHW)
             Case "po_1SUcqpQhnfWS9Eiv6OBSKEAo": GetStripeSchoolCode = "61369"       ' (AUS)
             Case "po_1SUG2bQYaS7mQRKSvLYg8nvA": GetStripeSchoolCode = "61096"       ' (AUSP)
-            Case "po_1SUG2bQYaS7mQRKSvLYg8nvA": GetStripeSchoolCode = "61096"       ' (AUSP)
             Case "po_1SUGAbH9wkJRSqOaolsjvkqc": GetStripeSchoolCode = "50884"       ' (BBRM)
             Case "po_1SUFugHoHDbMF2midH3m8REt": GetStripeSchoolCode = "35412"       ' (BCSI)
             Case "po_1SUFtRQYL6jHaUXMfrIVAxTH": GetStripeSchoolCode = "61620"       ' (BEN)
