@@ -4936,100 +4936,100 @@ JournalPath_CRJ:
                 ' Column A is intentionally left blank
                 
             ' "RECEIPT_DATE"
-                wsCRJ.Range("B2").Formula = "=IF(" & wsCRJFiltered.Name & "B2="""",""""," & wsCRJFiltered.Name & "B2)"
+                wsCRJ.Range("B2").Formula = "=IF('" & wsCRJFiltered.Name & "'!B2="""","""",'" & wsCRJFiltered.Name & "'!B2)"
                 
             ' "PAYMETHOD"
-                wsCRJ.Range("C2").Formula = "=IF(" & wsCRJFiltered.Name & "C2="""",""""," & wsCRJFiltered.Name & "C2)"
+                wsCRJ.Range("C2").Formula2 = "=IF('" & wsCRJFiltered.Name & "'!C2="""","""",'" & wsCRJFiltered.Name & "'!C2)"
                 
             ' "DOCDATE"
-                wsCRJ.Range("D2").Formula = "=IF(" & wsCRJFiltered.Name & "D2="""",""""," & wsCRJFiltered.Name & "D2)"
+                wsCRJ.Range("D2").Formula = "=IF('" & wsCRJFiltered.Name & "'!D2="""","""",'" & wsCRJFiltered.Name & "'!D2)"
                 
             ' "DOCNUMBER"
-                wsCRJ.Range("E2").Formula = "=IF(" & wsCRJFiltered.Name & "E2="""",""""," & wsCRJFiltered.Name & "E2)"
+                wsCRJ.Range("E2").Formula = "=IF('" & wsCRJFiltered.Name & "'!E2="""","""",'" & wsCRJFiltered.Name & "'!E2)"
                 
             ' "DESCRIPTION"
-                wsCRJ.Range("F2").Formula = "=IF(" & wsCRJFiltered.Name & "F2="""",""""," & wsCRJFiltered.Name & "F2)"
+                wsCRJ.Range("F2").Formula = "=IF('" & wsCRJFiltered.Name & "'!F2="""","""",'" & wsCRJFiltered.Name & "'!F2)"
                 
             ' "DEPOSITTO"
-                wsCRJ.Range("G2").Formula = "=IF(" & wsCRJFiltered.Name & "G2="""",""""," & wsCRJFiltered.Name & "G2)"
+                wsCRJ.Range("G2").Formula = "=IF('" & wsCRJFiltered.Name & "'!G2="""","""",'" & wsCRJFiltered.Name & "'!G2)"
                 
             ' "BANKACCOUNTID"
-                wsCRJ.Range("H2").Formula = "=IF(" & wsCRJFiltered.Name & "H2="""",""""," & wsCRJFiltered.Name & "H2)"
+                wsCRJ.Range("H2").Formula = "=IF('" & wsCRJFiltered.Name & "'!H2="""","""",'" & wsCRJFiltered.Name & "'!H2)"
                 
             ' "DEPOSITDATE"
-                wsCRJ.Range("I2").Formula = "=IF(" & wsCRJFiltered.Name & "I2="""",""""," & wsCRJFiltered.Name & "I2)"
+                wsCRJ.Range("I2").Formula = "=IF('" & wsCRJFiltered.Name & "'!I2="""","""",'" & wsCRJFiltered.Name & "'!I2)"
                 
             ' "UNDEPACCTNO"
-                wsCRJ.Range("J2").Formula = "=IF(" & wsCRJFiltered.Name & "J2="""",""""," & wsCRJFiltered.Name & "J2)"
+                wsCRJ.Range("J2").Formula = "=IF('" & wsCRJFiltered.Name & "'!J2="""","""",'" & wsCRJFiltered.Name & "'!J2)"
                 
             ' "CURRENCY"
-                wsCRJ.Range("K2").Formula = "=IF(" & wsCRJFiltered.Name & "K2="""",""""," & wsCRJFiltered.Name & "K2)"
+                wsCRJ.Range("K2").Formula = "=IF('" & wsCRJFiltered.Name & "'!K2="""","""",'" & wsCRJFiltered.Name & "'!K2)"
                 
             ' "EXCH_RATE_DATE"
-                wsCRJ.Range("L2").Formula = "=IF(" & wsCRJFiltered.Name & "L2="""",""""," & wsCRJFiltered.Name & "L2)"
+                wsCRJ.Range("L2").Formula = "=IF('" & wsCRJFiltered.Name & "'!L2="""","""",'" & wsCRJFiltered.Name & "'!L2)"
                 
             ' "EXCH_RATE_TYPE_ID"
-                wsCRJ.Range("M2").Formula = "=IF(" & wsCRJFiltered.Name & "M2="""",""""," & wsCRJFiltered.Name & "M2)"
+                wsCRJ.Range("M2").Formula = "=IF('" & wsCRJFiltered.Name & "'!M2="""","""",'" & wsCRJFiltered.Name & "'!M2)"
                 
             ' "EXCH_RATE_DATE"
-                wsCRJ.Range("N2").Formula = "=IF(" & wsCRJFiltered.Name & "N2="""",""""," & wsCRJFiltered.Name & "N2)"
+                wsCRJ.Range("N2").Formula = "=IF('" & wsCRJFiltered.Name & "'!N2="""","""",'" & wsCRJFiltered.Name & "'!N2)"
                 
             ' "LINE_NO"
-                wsCRJ.Range("O2").Formula = "=IF(" & wsCRJFiltered.Name & "O2="""",""""," & wsCRJFiltered.Name & "O2)"
+                wsCRJ.Range("O2").Formula = "=IF('" & wsCRJFiltered.Name & "'!O2="""","""",'" & wsCRJFiltered.Name & "'!O2)"
                 
             ' "ACCT_NO"
-                wsCRJ.Range("P2").Formula = "=IF(" & wsCRJFiltered.Name & "P2="""",""""," & wsCRJFiltered.Name & "P2)"
+                wsCRJ.Range("P2").Formula = "=IF('" & wsCRJFiltered.Name & "'!P2="""","""",'" & wsCRJFiltered.Name & "'!P2)"
                 
             ' "ACCOUNTLABEL"
-                wsCRJ.Range("Q2").Formula = "=IF(" & wsCRJFiltered.Name & "Q2="""",""""," & wsCRJFiltered.Name & "Q2)"
+                wsCRJ.Range("Q2").Formula = "=IF('" & wsCRJFiltered.Name & "'!Q2="""","""",'" & wsCRJFiltered.Name & "'!Q2)"
                 
             ' "TRX_AMOUNT"
-                wsCRJ.Range("R2").Formula = "=IF(" & wsCRJFiltered.Name & "R2="""",""""," & wsCRJFiltered.Name & "R2)"
+                wsCRJ.Range("R2").Formula = "=IF('" & wsCRJFiltered.Name & "'!R2="""","""",'" & wsCRJFiltered.Name & "'!R2)"
                 
             ' "AMOUNT"
-                wsCRJ.Range("S2").Formula = "=IF(" & wsCRJFiltered.Name & "S2="""",""""," & wsCRJFiltered.Name & "S2)"
+                wsCRJ.Range("S2").Formula = "=IF('" & wsCRJFiltered.Name & "'!S2="""","""",'" & wsCRJFiltered.Name & "'!S2)"
                 
             ' "DEPT_ID"
-                wsCRJ.Range("T2").Formula = "=IF(" & wsCRJFiltered.Name & "T2="""",""""," & wsCRJFiltered.Name & "T2)"
+                wsCRJ.Range("T2").Formula = "=IF('" & wsCRJFiltered.Name & "'!T2="""","""",'" & wsCRJFiltered.Name & "'!T2)"
                 
             ' "LOCATION_ID"
-                wsCRJ.Range("U2").Formula = "=IF(" & wsCRJFiltered.Name & "U2="""",""""," & wsCRJFiltered.Name & "U2)"
+                wsCRJ.Range("U2").Formula = "=IF('" & wsCRJFiltered.Name & "'!U2="""","""",'" & wsCRJFiltered.Name & "'!U2)"
                 
             ' "ITEM_MEMO"
-                wsCRJ.Range("V2").Formula = "=IF(" & wsCRJFiltered.Name & "V2="""",""""," & wsCRJFiltered.Name & "V2)"
+                wsCRJ.Range("V2").Formula = "=IF('" & wsCRJFiltered.Name & "'!V2="""","""",'" & wsCRJFiltered.Name & "'!V2)"
                 
             ' "OTHERRECEIPTSENTRY_PROJECTID"
-                wsCRJ.Range("W2").Formula = "=IF(" & wsCRJFiltered.Name & "W2="""",""""," & wsCRJFiltered.Name & "W2)"
+                wsCRJ.Range("W2").Formula = "=IF('" & wsCRJFiltered.Name & "'!W2="""","""",'" & wsCRJFiltered.Name & "'!W2)"
                 
             ' "OTHERRECEIPTSENTRY_CUSTOMERID"
-                wsCRJ.Range("X2").Formula = "=IF(" & wsCRJFiltered.Name & "X2="""",""""," & wsCRJFiltered.Name & "X2)"
+                wsCRJ.Range("X2").Formula = "=IF('" & wsCRJFiltered.Name & "'!X2="""","""",'" & wsCRJFiltered.Name & "'!X2)"
                 
             ' "OTHERRECEIPTSENTRY_ITEMID"
-                wsCRJ.Range("Y2").Formula = "=IF(" & wsCRJFiltered.Name & "Y2="""",""""," & wsCRJFiltered.Name & "Y2)"
+                wsCRJ.Range("Y2").Formula = "=IF('" & wsCRJFiltered.Name & "'!Y2="""","""",'" & wsCRJFiltered.Name & "'!Y2)"
                 
             ' "OTHERRECEIPTSENTRY_VENDORID"
-                wsCRJ.Range("Z2").Formula = "=IF(" & wsCRJFiltered.Name & "Z2="""",""""," & wsCRJFiltered.Name & "Z2)"
+                wsCRJ.Range("Z2").Formula = "=IF('" & wsCRJFiltered.Name & "'!Z2="""","""",'" & wsCRJFiltered.Name & "'!Z2)"
                 
             ' "OTHERRECEIPTSENTRY_EMPLOYEEID"
-                wsCRJ.Range("AA2").Formula = "=IF(" & wsCRJFiltered.Name & "AA2="""",""""," & wsCRJFiltered.Name & "AA2)"
+                wsCRJ.Range("AA2").Formula = "=IF('" & wsCRJFiltered.Name & "'!AA2="""","""",'" & wsCRJFiltered.Name & "'!AA2)"
                 
             ' "OTHERRECEIPTSENTRY_CLASSID"
-                wsCRJ.Range("AB2").Formula = "=IF(" & wsCRJFiltered.Name & "AB2="""",""""," & wsCRJFiltered.Name & "AB2)"
+                wsCRJ.Range("AB2").Formula = "=IF('" & wsCRJFiltered.Name & "'!AB2="""","""",'" & wsCRJFiltered.Name & "'!AB2)"
                 
             ' "PAYER_NAME"
-                wsCRJ.Range("AC2").Formula = "=IF(" & wsCRJFiltered.Name & "AC2="""",""""," & wsCRJFiltered.Name & "AC2)"
+                wsCRJ.Range("AC2").Formula = "=IF('" & wsCRJFiltered.Name & "'!AC2="""","""",'" & wsCRJFiltered.Name & "'!AC2)"
                 
             ' "SUPDOCID"
-                wsCRJ.Range("AD2").Formula = "=IF(" & wsCRJFiltered.Name & "AD2="""",""""," & wsCRJFiltered.Name & "AD2)"
+                wsCRJ.Range("AD2").Formula = "=IF('" & wsCRJFiltered.Name & "'!AD2="""","""",'" & wsCRJFiltered.Name & "'!AD2)"
                 
             ' "EXCHANGE_RATE"
-                wsCRJ.Range("AE2").Formula = "=IF(" & wsCRJFiltered.Name & "AE2="""",""""," & wsCRJFiltered.Name & "AE2)"
+                wsCRJ.Range("AE2").Formula = "=IF('" & wsCRJFiltered.Name & "'!AE2="""","""",'" & wsCRJFiltered.Name & "'!AE2)"
                 
             ' "OR_TRANSACTION_DATE"
-                wsCRJ.Range("AF2").Formula = "=IF(" & wsCRJFiltered.Name & "AF2="""",""""," & wsCRJFiltered.Name & "AF2)"
+                wsCRJ.Range("AF2").Formula = "=IF('" & wsCRJFiltered.Name & "'!AF2="""","""",'" & wsCRJFiltered.Name & "'!AF2)"
                 
             ' "GLDIMFUNDING_SOURCE"
-                wsCRJ.Range("AG2").Formula = "=IF(" & wsCRJFiltered.Name & "AG2="""",""""," & wsCRJFiltered.Name & "AG2)"
+                wsCRJ.Range("AG2").Formula = "=IF('" & wsCRJFiltered.Name & "'!AG2="""","""",'" & wsCRJFiltered.Name & "'!AG2)"
             
     ' ============================================================
     '                      FILL FORMULAS DOWN
@@ -5168,7 +5168,7 @@ MoveFiles:
                     
                 Next FileIndex
             End If
-
+            
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''------------------------------'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' FINALIZE WORKBOOK FORMATTING '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
